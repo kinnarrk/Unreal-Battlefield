@@ -19,6 +19,10 @@ public class Particle {
     double[] pBestVelocity;
     double[] pVelocity;
 
+    public Particle() {
+        
+    }
+    
     public Particle(int[] x) {
 
     }
