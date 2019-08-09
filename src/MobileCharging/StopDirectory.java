@@ -20,8 +20,8 @@ public class StopDirectory {
         stopDirectory = new ArrayList<Stop>();
     }
     
-    public Stop addStop() {
-        Stop stop = new Stop();
+    public Stop addStop(int demand) {
+        Stop stop = new Stop(demand);
         stopDirectory.add(stop);
         return stop;
     }

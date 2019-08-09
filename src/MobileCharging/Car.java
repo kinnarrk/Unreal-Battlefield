@@ -11,4 +11,14 @@ package MobileCharging;
  */
 public class Car {
     
+    int chargingCapacity;
+    
+    
+    public Car(int capacity){
+        this.chargingCapacity=capacity;
+    }
+    @Override
+	public String toString() {
+		return "Car Chargig Capacity=" + chargingCapacity ;
+	}
 }

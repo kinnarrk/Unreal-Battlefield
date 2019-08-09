@@ -38,12 +38,14 @@ public class MobileChargingDirectory {
         
         carDirectory = new CarDirectory();
         for(int i=0; i<cars; i++) {
-            carDirectory.addCar();
+            int cap = generateCapacity(50, 75);
+            carDirectory.addCar(cap);
         }
         
         stopDirectory = new StopDirectory();
         for(int i=0; i<stops; i++) {
-            stopDirectory.addStop();
+            int demand = generateCapacity(minb, maxb);
+            stopDirectory.addStop(demand);
         }
         
         System.out.println(carDirectory.getCar().size());
@@ -63,6 +65,10 @@ public class MobileChargingDirectory {
             }
             System.out.println();
         }
+    }
+    
+    int generateCapacity(int min, int max) {
+        return r.nextInt(max-min)+min;
     }
 
 }
