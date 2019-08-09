@@ -7,11 +7,23 @@ package MobileCharging;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  *
  * @author 19712
  */
 public class Stop {
+    int stopDemand;
+   
+    public Stop(int demand){
+        this.stopDemand=demand;
+    }
+    @Override
+	public String toString() {
+		return "Stop Demand=" + stopDemand ;
+	}
+   
+   
     
 }

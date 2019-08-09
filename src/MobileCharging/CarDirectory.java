@@ -19,8 +19,8 @@ public class CarDirectory {
         carDirectory = new ArrayList<Car>();
     }
     
-    public Car addCar() {
-        Car car = new Car();
+    public Car addCar(int cap) {
+        Car car = new Car(cap);
         carDirectory.add(car);
         return car;
     }
