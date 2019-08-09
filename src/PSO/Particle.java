@@ -5,6 +5,8 @@
  */
 package PSO;
 
+import java.util.Random;
+
 /**
  *
  * @author 19712
@@ -14,10 +16,10 @@ public class Particle {
     double[] solution;
     double fitnessValue;
 
-    double[] pBest;
-    double pBestValue;
-    double[] pBestVelocity;
-    double[] pVelocity;
+    double[] particleBest;
+    double particleBestValue;
+    double[] particleBestVelocity;
+    double[] particleVelocity;
 
     public Particle() {
         
@@ -26,6 +28,20 @@ public class Particle {
     public Particle(int[] x) {
 
     }
+    
+    Random random = new Random();
+    
+    public void setRandomVelcities(int x) {
+		this.particleVelocity = new double[x];
+		for (int i = 0; i < x; i++) {
+			this.particleVelocity[i] = getRandomVelocity(x);
+		}
+	}
+
+	private double getRandomVelocity(int MAX) {
+		int MIN = 0;
+		return (random.nextDouble() * (MAX - MIN)) + MIN;
+	}
 
     public double[] getSolution() {
         return solution;
@@ -44,35 +60,35 @@ public class Particle {
     }
 
     public double[] getpBest() {
-        return pBest;
+        return particleBest;
     }
 
     public void setpBest(double[] pBest) {
-        this.pBest = pBest;
+        this.particleBest = pBest;
     }
 
     public double getpBestValue() {
-        return pBestValue;
+        return particleBestValue;
     }
 
     public void setpBestValue(double pBestValue) {
-        this.pBestValue = pBestValue;
+        this.particleBestValue = pBestValue;
     }
 
     public double[] getpBestVelocity() {
-        return pBestVelocity;
+        return particleBestVelocity;
     }
 
     public void setpBestVelocity(double[] pBestVelocity) {
-        this.pBestVelocity = pBestVelocity;
+        this.particleBestVelocity = pBestVelocity;
     }
 
     public double[] getpVelocity() {
-        return pVelocity;
+        return particleVelocity;
     }
 
     public void setpVelocity(double[] pVelocity) {
-        this.pVelocity = pVelocity;
+        this.particleVelocity = pVelocity;
     }
 
 }
