@@ -48,13 +48,12 @@ public class MobileChargingDirectory {
             stopDirectory.addStop(demand);
         }
         
-        System.out.println(carDirectory.getCar().size());
     }
 
     public void printDistanceMatrix() {
         System.out.print("\tStation\t");
         for (int k = 0; k < 40; k++) {
-            System.out.print("Store" + (k + 1) + "\t");
+            System.out.print("Stop" + (k + 1) + "\t");
         }
         System.out.println();
 
@@ -71,4 +70,8 @@ public class MobileChargingDirectory {
         return r.nextInt(max-min)+min;
     }
 
+    public double[][] getAdjMatrix() {
+        return adjMatrix;
+    }
+    
 }

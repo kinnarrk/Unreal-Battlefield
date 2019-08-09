@@ -33,4 +33,13 @@ public class Optimizer {
         }
         return dest;
     }
+    
+    //copy array
+    public static double[] copyFromArray(double[] src) {
+        double[] dest = new double[src.length];
+        for (int i = 0; i < src.length; i++) {
+            dest[i] = src[i];
+        }
+        return dest;
+    }
 }
