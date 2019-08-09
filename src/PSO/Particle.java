@@ -13,42 +13,40 @@ import java.util.Random;
  */
 public class Particle {
 
-    double[] solution;
+    double[] path;
     double fitnessValue;
 
     double[] particleBest;
     double particleBestValue;
     double[] particleBestVelocity;
     double[] particleVelocity;
+    Random r = new Random();
 
-    public Particle() {
-        
-    }
-    
-    public Particle(int[] x) {
-
-    }
-    
-    Random random = new Random();
-    
-    public void setRandomVelcities(int x) {
-		this.particleVelocity = new double[x];
-		for (int i = 0; i < x; i++) {
-			this.particleVelocity[i] = getRandomVelocity(x);
-		}
-	}
-
-	private double getRandomVelocity(int MAX) {
-		int MIN = 0;
-		return (random.nextDouble() * (MAX - MIN)) + MIN;
-	}
-
-    public double[] getSolution() {
-        return solution;
+    public Particle(int[] path) {
+        this.path = Optimizer.copyFromRandomArray(path);
+        this.particleBest = this.path;
+        setRandomVelcities(path.length);
+        this.particleBestVelocity = particleVelocity;
     }
 
-    public void setSolution(double[] solution) {
-        this.solution = solution;
+    public void setRandomVelcities(int val) {
+        this.particleVelocity = new double[val];
+        for (int i = 0; i < val; i++) {
+            this.particleVelocity[i] = getRandomVelocity(val);
+        }
+    }
+
+    private double getRandomVelocity(int maximum) {
+        int minimum = 0;
+        return (r.nextDouble() * (maximum - minimum)) + minimum;
+    }
+
+    public double[] getPath() {
+        return path;
+    }
+
+    public void setPath(double[] solution) {
+        this.path = solution;
     }
 
     public double getFitnessValue() {
