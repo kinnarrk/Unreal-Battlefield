@@ -68,9 +68,8 @@ public class MobileCharging {
             thread[t-1] = new Thread("Thread"+t){
                 public void run(){
                     try{
-                        this.sleep(tmp*100);
+                        this.sleep(tmp*250);
                     } catch (InterruptedException e){}
-//                    System.out.println("\nfor loop iteration: " + tmp);
                     swarm.optimizeSolutions();
                     swarm.printIterationResults(tmp, particleIterations);
                     
