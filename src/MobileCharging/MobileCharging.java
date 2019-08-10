@@ -27,7 +27,7 @@ public class MobileCharging {
     public static void main(String[] args) {
         MobileChargingDirectory directory = new MobileChargingDirectory(STOP, TOTAL_CARS, MIN_CAR_BATTERY, MAX_CAR_BATTERY);
 
-        Swarm swarm = new Swarm(STOP);
+        final Swarm swarm = new Swarm(STOP);
         swarm.setMap(directory.getAdjMatrix());
         
         int[] possiblePath = new int[STOP];
@@ -42,15 +42,15 @@ public class MobileCharging {
             
             double fitnessValue = swarm.getFitnessValue(p.getPath());
             p.setFitnessValue(fitnessValue);
-            System.out.println("get f 1st done");
+//            System.out.println("get f 1st done");
             double bestfitnessValue = swarm.getFitnessValue(p.getpBest());
             p.setpBestValue(bestfitnessValue);
-            System.out.println("get f 2nd done");
+//            System.out.println("get f 2nd done");
         }
         
         swarm.findGlobalBest();
         
-        Map<String, Map<Double, Double>> particleIterations = new HashMap<String, Map<Double, Double>>();
+        final Map<String, Map<Double, Double>> particleIterations = new HashMap<String, Map<Double, Double>>();
         
          //print iteration 0 results
         System.out.print("Iteration\t");
@@ -61,11 +61,22 @@ public class MobileCharging {
         System.out.println("f(gBest)");
         swarm.printIterationResults(0, particleIterations);
 
+        Thread thread[] = new Thread[TOTAL_ITERATIONS];
         //Optimize the solution and return the best solution after the iterations terminate
         for (int t = 1; t <= TOTAL_ITERATIONS; t++) {
-            System.out.println("\nfor loop iteration: " + t);
-            swarm.optimizeSolutions();
-            swarm.printIterationResults(t, particleIterations);
+            final int tmp = t;            
+            thread[t-1] = new Thread("Thread"+t){
+                public void run(){
+                    try{
+                        this.sleep(tmp*100);
+                    } catch (InterruptedException e){}
+//                    System.out.println("\nfor loop iteration: " + tmp);
+                    swarm.optimizeSolutions();
+                    swarm.printIterationResults(tmp, particleIterations);
+                    
+                }
+            };
+            thread[t-1].start();
         }
     }
 }

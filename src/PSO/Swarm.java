@@ -52,10 +52,10 @@ public class Swarm {
 
         int prevStop = 0;
         double fitnessSum = 0;
-        for(double d: sol){
-            System.out.print(d+" ");
-        }
-        System.out.println("");
+//        for(double d: sol){
+//            System.out.print(d+" ");
+//        }
+//        System.out.println("");
         for (int i = 0; i < sol.length; i++) {
             int v = (int) Math.round(sol[i]);
 //            System.out.println("prevstop:" + prevStop + ": v: " + v);
