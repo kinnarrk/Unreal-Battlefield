@@ -42,9 +42,10 @@ public class MobileCharging {
             
             double fitnessValue = swarm.getFitnessValue(p.getPath());
             p.setFitnessValue(fitnessValue);
-            
+            System.out.println("get f 1st done");
             double bestfitnessValue = swarm.getFitnessValue(p.getpBest());
             p.setpBestValue(bestfitnessValue);
+            System.out.println("get f 2nd done");
         }
         
         swarm.findGlobalBest();
@@ -62,6 +63,7 @@ public class MobileCharging {
 
         //Optimize the solution and return the best solution after the iterations terminate
         for (int t = 1; t <= TOTAL_ITERATIONS; t++) {
+            System.out.println("\nfor loop iteration: " + t);
             swarm.optimizeSolutions();
             swarm.printIterationResults(t, particleIterations);
         }

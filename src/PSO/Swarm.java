@@ -25,9 +25,9 @@ public class Swarm {
     private double gValue;
     private double[] gBestVelocity;
     private double[][] map;
-    private static final double INERTIA = 0.729844;
-    private static final double CONGNITIVE = 1.496180;
-    private static final double SOCIAL = 1.496180;
+    private static final double INERTIA = 0.659;
+    private static final double CONGNITIVE = 0.213;
+    private static final double SOCIAL = 0.247;
     private Random r = new Random();
     
     public Swarm(int stops) {
@@ -52,9 +52,13 @@ public class Swarm {
 
         int prevStop = 0;
         double fitnessSum = 0;
-
+        for(double d: sol){
+            System.out.print(d+" ");
+        }
+        System.out.println("");
         for (int i = 0; i < sol.length; i++) {
             int v = (int) Math.round(sol[i]);
+//            System.out.println("prevstop:" + prevStop + ": v: " + v);
             fitnessSum += map[prevStop][v];
             prevStop = v;
         }
@@ -129,9 +133,11 @@ public class Swarm {
         
         for (int i = 0; i < newVelocity.length; i++) {
             newVelocity[i] = INERTIA * p.getpVelocity()[i] + (CONGNITIVE * r1 * (p.getpBest()[i] - p.getPath()[i])) + (SOCIAL * r2 * (gBestPath[i] - p.getPath()[i]));
+//            if(newVelocity[i]<0)
+//                System.out.println("New velo < 0: "+ newVelocity[i]);
         }
 
-        p.setpVelocity(newVelocity);
+        p.setpVelocity(newVelocity);        
 
     }
 
@@ -140,7 +146,8 @@ public class Swarm {
         
         for (int i = 0; i < p.getPath().length; i++) {
             double value = p.getPath()[i] + p.getpVelocity()[i];
-            path[i] = value > p.getpVelocity().length ? p.getPath().length : value;   
+            path[i] = value > p.getPath().length ? p.getPath().length : value;   
+//            p.xSolution[i] = p.xSolution[i] + p.pVelocity[i] > p.xSolution.length ? p.xSolution.length : p.xSolution[i] + p.pVelocity[i];
         }
         
         p.setPath(path);
