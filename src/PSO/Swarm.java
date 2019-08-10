@@ -114,7 +114,7 @@ public class Swarm {
             // update pBest of the particle
             if (p.getFitnessValue() < p.getpBestValue()) {
                 p.setpBest(path);
-                p.setpBestValue(p.getpBestValue());
+                p.setpBestValue(p.getFitnessValue());
                 p.setpBestVelocity(velocity);
             }
 
@@ -153,6 +153,64 @@ public class Swarm {
         p.setPath(path);
 
     }
+    
+    
+    
+    public int[] decodeOptimalSolution(){
+		
+		System.out.println("gFitnessValue=" + gValue);
+		System.out.println("gBest="+Arrays.toString(gBestPath));		
+		
+		Map<Double, List<Integer>> indicies = new HashMap<>();
+		
+		for(int i=0; i<gBestPath.length ; i++){
+			if(indicies.get(gBestPath[i])== null)
+				indicies.put(gBestPath[i], new ArrayList<Integer>());
+			
+			indicies.get(gBestPath[i]).add(i);
+		}
+		
+		Arrays.sort(gBestPath);
+		
+		int[] optimalRoute = new int[gBestPath.length];
+		
+		for(int i=0; i<optimalRoute.length;i++){
+			if(indicies.get(gBestPath[i]).size() > 1){
+				// find the lowest velocity and add that first				
+				int ii = i;
+				for(int k=0; k<indicies.get(gBestPath[ii]).size(); k++){					
+					optimalRoute[i] = indicies.get(gBestPath[ii]).get(k) + 1;
+					i++;
+				}				
+				
+			}else			
+			 optimalRoute[i] = indicies.get(gBestPath[i]).get(0) + 1;
+		}
+		
+                double distance[] = Optimizer.copyFromRandomArray(optimalRoute);
+                System.out.println("Total Distance: "+getFitnessValue(distance));
+		return optimalRoute;
+	}
+	
+	public void printSwarmDetails(){
+		
+		
+		System.out.println("No of Particles : " + getParticles().size());
+		
+		
+		System.out.println("Particle Details : ");
+		for(Particle p: getParticles())
+			System.out.println(p);
+		
+		System.out.println("Global   [gBest="+Arrays.toString(gBestPath)+", gFitnessValue=" + gBestDistance+"]");
+				
+	}
+    
+    
+    
+    
+    
+    
 
     public double[][] getMap() {
         return map;
