@@ -19,6 +19,17 @@ public class Target {
     public Target(int payload){
         this.targetPayload=payload;
     }
+
+    public int getTargetPayload() {
+        return targetPayload;
+    }
+
+    public void setTargetPayload(int targetPayload) {
+        this.targetPayload = targetPayload;
+    }
+    
+    
+    
     @Override
 	public String toString() {
 		return "Target Payload=" + targetPayload ;

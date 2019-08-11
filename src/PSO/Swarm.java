@@ -156,7 +156,7 @@ public class Swarm {
     
     
     
-    public int[] decodeOptimalSolution(){
+    public int[] decodeStrikeRoute(){
 		
 		System.out.println("gFitnessValue=" + gValue);
 		System.out.println("gBest="+Arrays.toString(gBestPath));		
