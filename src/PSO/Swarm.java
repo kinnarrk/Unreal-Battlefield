@@ -30,11 +30,11 @@ public class Swarm {
     private static final double SOCIAL = 0.247;
     private Random r = new Random();
     
-    public Swarm(int stops) {
+    public Swarm(int targets) {
         swarm = new ArrayList<Particle>();
 
-        gBestPath = new double[stops];
-        gBestVelocity = new double[stops];
+        gBestPath = new double[targets];
+        gBestVelocity = new double[targets];
         gValue = Double.MAX_VALUE;
     }
 
@@ -50,7 +50,7 @@ public class Swarm {
 
     public double getFitnessValue(double[] sol) {
 
-        int prevStop = 0;
+        int prevTarget = 0;
         double fitnessSum = 0;
 //        for(double d: sol){
 //            System.out.print(d+" ");
@@ -58,12 +58,12 @@ public class Swarm {
 //        System.out.println("");
         for (int i = 0; i < sol.length; i++) {
             int v = (int) Math.round(sol[i]);
-//            System.out.println("prevstop:" + prevStop + ": v: " + v);
-            fitnessSum += map[prevStop][v];
-            prevStop = v;
+//            System.out.println("prevTarget:" + prevTarget + ": v: " + v);
+            fitnessSum += map[prevTarget][v];
+            prevTarget = v;
         }
 
-        fitnessSum += map[prevStop][0];
+        fitnessSum += map[prevTarget][0];
 
         return fitnessSum;
     }

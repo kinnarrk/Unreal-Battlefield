@@ -17,8 +17,8 @@ public class WarZoneSimulatorDirectory {
     int TOTAL_DRONES;
     private double[][] adjMatrix;
     private final Random r = new Random();
-    private DroneDirectory carDirectory;
-    private TargetDirectory stopDirectory;
+    private DroneDirectory droneDirectory;
+    private TargetDirectory targetDirectory;
     
     public WarZoneSimulatorDirectory(int targets, int drones, int minb, int maxb) {
         this.TOTAL_TARGETS = targets;
@@ -36,16 +36,16 @@ public class WarZoneSimulatorDirectory {
             }
         }
         
-        carDirectory = new DroneDirectory();
+        droneDirectory = new DroneDirectory();
         for(int i=0; i<drones; i++) {
             int cap = generateCapacity(50, 75);
-            carDirectory.addDrone(cap);
+            droneDirectory.addDrone(cap);
         }
         
-        stopDirectory = new TargetDirectory();
+        targetDirectory = new TargetDirectory();
         for(int i=0; i<targets; i++) {
             int demand = generateCapacity(minb, maxb);
-            stopDirectory.addStop(demand);
+            targetDirectory.addTarget(demand);
         }
         
     }
