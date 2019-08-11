@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package MobileCharging;
+package WarZone;
 
 import PSO.Optimizer;
 import PSO.Particle;
@@ -16,24 +16,24 @@ import java.util.Map;
  *
  * @author bhaVYa
  */
-public class MobileCharging {
+public class WarZoneSimulator {
 
-    private static final int STOP = 50;
-    private static final int TOTAL_CARS = 5;
-    private static final int MIN_CAR_BATTERY = 15;
-    private static final int MAX_CAR_BATTERY = 50;
+    private static final int TARGET = 50;
+    private static final int TOTAL_DRONES = 5;
+    private static final int MIN_DRONE_BATTERY = 15;
+    private static final int MAX_DRONE_BATTERY = 50;
     private static final int TOTAL_PARTICLES = 30;
     private static final int TOTAL_ITERATIONS = 40;
 
     public static void main(String[] args) {
-        MobileChargingDirectory directory = new MobileChargingDirectory(STOP, TOTAL_CARS, MIN_CAR_BATTERY, MAX_CAR_BATTERY);
+        WarZoneSimulatorDirectory directory = new WarZoneSimulatorDirectory(TARGET, TOTAL_DRONES, MIN_DRONE_BATTERY, MAX_DRONE_BATTERY);
 
-        final Swarm swarm = new Swarm(STOP);
+        final Swarm swarm = new Swarm(TARGET);
         swarm.setMap(directory.getAdjMatrix());
 
-        int[] possiblePath = new int[STOP];
+        int[] possiblePath = new int[TARGET];
 
-        for (int i = 0; i < STOP; i++) {
+        for (int i = 0; i < TARGET; i++) {
             possiblePath[i] = i + 1;
         }
 

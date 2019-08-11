@@ -3,22 +3,27 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package MobileCharging;
+package WarZone;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 /**
  *
  * @author 19712
  */
-public class Car {
-    
-    int chargingCapacity;
-    
-    
-    public Car(int capacity){
-        this.chargingCapacity=capacity;
+public class Target {
+    int targetDemand;
+   
+    public Target(int demand){
+        this.targetDemand=demand;
     }
     @Override
 	public String toString() {
-		return "Car Chargig Capacity=" + chargingCapacity ;
+		return "Target Demand=" + targetDemand ;
 	}
+   
+   
+    
 }
