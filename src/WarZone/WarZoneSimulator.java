@@ -93,16 +93,19 @@ public class WarZoneSimulator {
         }
 
         System.out.println("Strike Path");
-        System.out.println("---------------------------------------------------------");
+        System.out.println("====================================================");
         
         int[] decodedStrikeRoute = swarm.decodeStrikeRoute();
         System.out.println("Strike Route : " + Arrays.toString(decodedStrikeRoute));
 
+        System.out.println("Drone Simulation with different payload");
+        System.out.println("====================================================");
+        
         Map<String, List<Integer>> strikeRoute = directory.findStrikeRoute(decodedStrikeRoute);
 
         for (Map.Entry<String, List<Integer>> entry : strikeRoute.entrySet()) {
-            System.out.println(entry.getKey() + " -> " + entry.getValue());
-            //gui.displayGraph("Graph" + entry.getKey(), entry.getValue());
+            System.out.println(entry.getKey() + " \nStrike Route: " + entry.getValue());
+            System.out.println("-------------------------------------------------------");
         }
     }
 }
