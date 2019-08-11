@@ -3,27 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package MobileCharging;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+package WarZone;
 
 /**
  *
  * @author 19712
  */
-public class Stop {
-    int stopDemand;
-   
-    public Stop(int demand){
-        this.stopDemand=demand;
+public class Drone {
+    
+    int payLoadCapacity;
+    
+    
+    public Drone(int capacity){
+        this.payLoadCapacity=capacity;
     }
     @Override
 	public String toString() {
-		return "Stop Demand=" + stopDemand ;
+		return "Drone Payload Capacity=" + payLoadCapacity ;
 	}
-   
-   
-    
 }
