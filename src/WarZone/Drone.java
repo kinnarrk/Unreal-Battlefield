@@ -12,9 +12,11 @@ package WarZone;
 public class Drone {
     
     int payLoadCapacity;
-    
+    private String name;
+    private static int no;
     
     public Drone(int capacity){
+        this.name = "Drone-"+(++no);
         this.payLoadCapacity=capacity;
     }
 
@@ -29,6 +31,6 @@ public class Drone {
     
     @Override
 	public String toString() {
-		return "Drone Payload Capacity=" + payLoadCapacity ;
+		return this.name ;
 	}
 }

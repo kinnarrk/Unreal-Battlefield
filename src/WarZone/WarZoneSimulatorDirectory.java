@@ -85,7 +85,7 @@ public class WarZoneSimulatorDirectory {
             }
             strikeRoute.add(0);
             totalTrips++;
-            hashMap.put("Drone Capacity:" + drones.get(i).getPayLoadCapacity() + ",Trips:" + totalTrips + ",TotalDistance:" + totalDistance, strikeRoute);
+            hashMap.put(drones.get(i)+" \nPayload:" + drones.get(i).getPayLoadCapacity() + "\nTrips:" + totalTrips + "\nTotalDistance:" + totalDistance, strikeRoute);
         }
         return hashMap;
 
