@@ -20,13 +20,13 @@ public class WarZoneSimulator {
 
     private static final int TARGET = 50;
     private static final int TOTAL_DRONES = 5;
-    private static final int MIN_DRONE_BATTERY = 15;
-    private static final int MAX_DRONE_BATTERY = 50;
+    private static final int MIN_DRONE_PAYLOAD = 15;
+    private static final int MAX_DRONE_PAYLOAD = 50;
     private static final int TOTAL_PARTICLES = 30;
     private static final int TOTAL_ITERATIONS = 40;
 
     public static void main(String[] args) {
-        WarZoneSimulatorDirectory directory = new WarZoneSimulatorDirectory(TARGET, TOTAL_DRONES, MIN_DRONE_BATTERY, MAX_DRONE_BATTERY);
+        WarZoneSimulatorDirectory directory = new WarZoneSimulatorDirectory(TARGET, TOTAL_DRONES, MIN_DRONE_PAYLOAD, MAX_DRONE_PAYLOAD);
 
         final Swarm swarm = new Swarm(TARGET);
         swarm.setMap(directory.getAdjMatrix());
@@ -67,6 +67,7 @@ public class WarZoneSimulator {
         for (int t = 1; t <= TOTAL_ITERATIONS; t++) {
             final int tmp = t;
             thread[t - 1] = new Thread("Thread" + t) {
+                @Override
                 public void run() {
                     if(tmp>1)
                     try {

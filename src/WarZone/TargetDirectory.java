@@ -20,13 +20,13 @@ public class TargetDirectory {
         targetDirectory = new ArrayList<Target>();
     }
     
-    public Target addStop(int demand) {
-        Target target = new Target(demand);
+    public Target addTarget(int payload) {
+        Target target = new Target(payload);
         targetDirectory.add(target);
         return target;
     }
     
-    public List<Target> getStop() {
+    public List<Target> getTarget() {
         return targetDirectory;
     }
     

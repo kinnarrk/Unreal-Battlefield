@@ -14,14 +14,14 @@ import java.util.Random;
  * @author 19712
  */
 public class Target {
-    int targetDemand;
+    int targetPayload;
    
-    public Target(int demand){
-        this.targetDemand=demand;
+    public Target(int payload){
+        this.targetPayload=payload;
     }
     @Override
 	public String toString() {
-		return "Target Demand=" + targetDemand ;
+		return "Target Payload=" + targetPayload ;
 	}
    
    
