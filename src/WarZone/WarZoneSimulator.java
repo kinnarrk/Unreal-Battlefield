@@ -10,6 +10,7 @@ import PSO.Particle;
 import PSO.Swarm;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -18,12 +19,12 @@ import java.util.Map;
  */
 public class WarZoneSimulator {
 
-    private static final int TARGET = 50;
+    private static final int TARGET = 10;
     private static final int TOTAL_DRONES = 5;
-    private static final int MIN_DRONE_PAYLOAD = 15;
-    private static final int MAX_DRONE_PAYLOAD = 50;
+    private static final int MIN_DRONE_PAYLOAD = 1;
+    private static final int MAX_DRONE_PAYLOAD = 5;
     private static final int TOTAL_PARTICLES = 30;
-    private static final int TOTAL_ITERATIONS = 40;
+    private static final int TOTAL_ITERATIONS = 20;
 
     public static void main(String[] args) {
         WarZoneSimulatorDirectory directory = new WarZoneSimulatorDirectory(TARGET, TOTAL_DRONES, MIN_DRONE_PAYLOAD, MAX_DRONE_PAYLOAD);
@@ -69,12 +70,13 @@ public class WarZoneSimulator {
             thread[t - 1] = new Thread("Thread" + t) {
                 @Override
                 public void run() {
-                    if(tmp>1)
-                    try {
+                    if (tmp > 1) {
+                        try {
 //                        thread[tmp - 2].join();
-                    
-                        this.sleep(tmp * 250);
-                    } catch (InterruptedException e) {
+
+                            this.sleep(tmp * 250);
+                        } catch (InterruptedException e) {
+                        }
                     }
                     swarm.optimizeSolutions();
                     swarm.printIterationResults(tmp, particleIterations);
@@ -83,16 +85,24 @@ public class WarZoneSimulator {
             };
             thread[t - 1].start();
         }
-        for(Thread t: thread){
+        for (Thread t : thread) {
             try {
                 t.join();
-            } catch (InterruptedException e) {}
+            } catch (InterruptedException e) {
+            }
         }
-        
-        System.out.println("Optimal Path");
+
+        System.out.println("Strike Path");
         System.out.println("---------------------------------------------------------");
-        //Decode the gBest Solution
-        int[] optimalRoute = swarm.decodeOptimalSolution();
-        System.out.println("Optimal Route : " + Arrays.toString(optimalRoute));
+        
+        int[] decodedStrikeRoute = swarm.decodeStrikeRoute();
+        System.out.println("Strike Route : " + Arrays.toString(decodedStrikeRoute));
+
+        Map<String, List<Integer>> strikeRoute = directory.findStrikeRoute(decodedStrikeRoute);
+
+        for (Map.Entry<String, List<Integer>> entry : strikeRoute.entrySet()) {
+            System.out.println(entry.getKey() + " -> " + entry.getValue());
+            //gui.displayGraph("Graph" + entry.getKey(), entry.getValue());
+        }
     }
 }

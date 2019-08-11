@@ -17,6 +17,16 @@ public class Drone {
     public Drone(int capacity){
         this.payLoadCapacity=capacity;
     }
+
+    public int getPayLoadCapacity() {
+        return payLoadCapacity;
+    }
+
+    public void setPayLoadCapacity(int payLoadCapacity) {
+        this.payLoadCapacity = payLoadCapacity;
+    }
+    
+    
     @Override
 	public String toString() {
 		return "Drone Payload Capacity=" + payLoadCapacity ;
