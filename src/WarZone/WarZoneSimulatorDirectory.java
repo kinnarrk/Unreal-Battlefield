@@ -114,5 +114,22 @@ public class WarZoneSimulatorDirectory {
     public double[][] getAdjMatrix() {
         return adjMatrix;
     }
+
+    public DroneDirectory getDroneDirectory() {
+        return droneDirectory;
+    }
+
+    public void setDroneDirectory(DroneDirectory droneDirectory) {
+        this.droneDirectory = droneDirectory;
+    }
+
+    public TargetDirectory getTargetDirectory() {
+        return targetDirectory;
+    }
+
+    public void setTargetDirectory(TargetDirectory targetDirectory) {
+        this.targetDirectory = targetDirectory;
+    }
+    
     
 }

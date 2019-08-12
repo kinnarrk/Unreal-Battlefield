@@ -15,8 +15,11 @@ import java.util.Random;
  */
 public class Target {
     int targetPayload;
-   
+    private String name;
+    private static int no = 0;
+    
     public Target(int payload){
+        this.name = "Target-"+(++no);
         this.targetPayload=payload;
     }
 
@@ -32,7 +35,7 @@ public class Target {
     
     @Override
 	public String toString() {
-		return "Target Payload=" + targetPayload ;
+		return this.name+" Payload required:" + targetPayload ;
 	}
    
    
