@@ -78,7 +78,7 @@ public class WarZoneSimulator {
             System.out.print("p(" + (i + 1) + ")\tpBest(" + (i + 1) + ")\t|\t");
         }
 
-        System.out.println("f(gBest)\t|");
+        System.out.println("p(gBest)\t|");
         System.out.print("----------------|-------");
         for (int i = 0; i < swarm.getParticles().size(); i++) {
             System.out.print("------------------------|-------");
@@ -119,7 +119,7 @@ public class WarZoneSimulator {
         System.out.println("====================================================");
         
         int[] decodedStrikeRoute = swarm.decodeStrikeRoute();
-        System.out.println("Strike Route : " + Arrays.toString(decodedStrikeRoute));
+        System.out.println("Optimal Strike Route : " + Arrays.toString(decodedStrikeRoute));
 
         System.out.println("\n\nDrone Simulation with different payload");
         System.out.println("====================================================");
