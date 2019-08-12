@@ -11,9 +11,9 @@ import java.util.Random;
  *
  * @author Kinnar
  */
-public class Optimizer {
+public class Helper {
 
-    public static void randomArray(int[] ar) {
+    public static void shuffleArray(int[] ar) {
         Random rnd = new Random();
         for (int i = ar.length - 1; i > 0; i--) {
             int idx = rnd.nextInt(i + 1);
@@ -22,11 +22,9 @@ public class Optimizer {
             ar[idx] = ar[i];
             ar[i] = temp;
         }
-
     }
 
-    // copy the int to double arr
-    public static double[] copyFromRandomArray(int[] src) {
+    public static double[] intToDoubleArray(int[] src) {
         double[] dest = new double[src.length];
         for (int i = 0; i < src.length; i++) {
             dest[i] = src[i];
@@ -34,8 +32,7 @@ public class Optimizer {
         return dest;
     }
     
-    //copy array
-    public static double[] copyFromArray(double[] src) {
+    public static double[] replicateArray(double[] src) {
         double[] dest = new double[src.length];
         for (int i = 0; i < src.length; i++) {
             dest[i] = src[i];

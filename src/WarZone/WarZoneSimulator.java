@@ -5,7 +5,7 @@
  */
 package WarZone;
 
-import PSO.Optimizer;
+import PSO.Helper;
 import PSO.Particle;
 import PSO.Swarm;
 import java.util.Arrays;
@@ -57,7 +57,7 @@ public class WarZoneSimulator {
         
         
         for (int i = 0; i < TOTAL_PARTICLES; i++) {
-            Optimizer.randomArray(possiblePath);
+            Helper.shuffleArray(possiblePath);
             Particle p = swarm.addParticle(possiblePath);
 
             double fitnessValue = swarm.getFitnessValue(p.getPath());

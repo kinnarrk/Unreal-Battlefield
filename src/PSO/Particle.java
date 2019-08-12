@@ -23,7 +23,7 @@ public class Particle {
     Random r = new Random();
 
     public Particle(int[] path) {
-        this.path = Optimizer.copyFromRandomArray(path);
+        this.path = Helper.intToDoubleArray(path);
         this.particleBest = this.path;
         setRandomVelocities(path.length);
         this.particleBestVelocity = particleVelocity;
