@@ -21,13 +21,13 @@ public class WarZoneSimulator {
 
     private static final int TARGET = 10;
     private static final int TOTAL_DRONES = 5;
-    private static final int MIN_DRONE_PAYLOAD = 1;
-    private static final int MAX_DRONE_PAYLOAD = 5;
+    private static final int MIN_TARGET_PAYLOAD = 1;
+    private static final int MAX_TARGET_PAYLOAD = 5;
     private static final int TOTAL_PARTICLES = 30;
     private static final int TOTAL_ITERATIONS = 20;
 
     public static void main(String[] args) {
-        WarZoneSimulatorDirectory directory = new WarZoneSimulatorDirectory(TARGET, TOTAL_DRONES, MIN_DRONE_PAYLOAD, MAX_DRONE_PAYLOAD);
+        WarZoneSimulatorDirectory directory = new WarZoneSimulatorDirectory(TARGET, TOTAL_DRONES, MIN_TARGET_PAYLOAD, MAX_TARGET_PAYLOAD);
 
         final Swarm swarm = new Swarm(TARGET);
         swarm.setMap(directory.getAdjMatrix());
@@ -46,7 +46,7 @@ public class WarZoneSimulator {
             System.out.println(t);
         }
         System.out.println("\n-------------------------------------------------");
-        System.out.println("Particle Swarm Optimization for for Battlefield");
+        System.out.println("Particle Swarm Optimization for Battlefield");
         System.out.println("-------------------------------------------------\n");
         int[] possiblePath = new int[TARGET];
 

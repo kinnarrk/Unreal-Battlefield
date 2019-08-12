@@ -164,7 +164,6 @@ public class Swarm {
             if (routes.get(gBestPath[i]) == null) {
                 routes.put(gBestPath[i], new ArrayList<Integer>());
             }
-
             routes.get(gBestPath[i]).add(i);
         }
 
@@ -175,9 +174,9 @@ public class Swarm {
         for (int i = 0; i < strikeRoute.length; i++) {
             if (routes.get(gBestPath[i]).size() > 1) {
                 // find the lowest velocity and add that first				
-                int ii = i;
-                for (int k = 0; k < routes.get(gBestPath[ii]).size(); k++) {
-                    strikeRoute[i] = routes.get(gBestPath[ii]).get(k) + 1;
+                int j = i;
+                for (int k = 0; k < routes.get(gBestPath[j]).size(); k++) {
+                    strikeRoute[i] = routes.get(gBestPath[j]).get(k) + 1;
                     i++;
                 }
 
