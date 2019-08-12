@@ -25,9 +25,10 @@ public class WarZoneSimulator {
     private static final int MAX_TARGET_PAYLOAD = 5;
     private static final int TOTAL_PARTICLES = 30;
     private static final int TOTAL_ITERATIONS = 20;
+    private static final int TOTAL_AIRBASE = 4;
 
     public static void main(String[] args) {
-        WarZoneSimulatorDirectory directory = new WarZoneSimulatorDirectory(TARGET, TOTAL_DRONES, MIN_TARGET_PAYLOAD, MAX_TARGET_PAYLOAD);
+        WarZoneSimulatorDirectory directory = new WarZoneSimulatorDirectory(TARGET, TOTAL_DRONES, MIN_TARGET_PAYLOAD, MAX_TARGET_PAYLOAD, TOTAL_AIRBASE);
 
         final Swarm swarm = new Swarm(TARGET);
         swarm.setMap(directory.getAdjMatrix());

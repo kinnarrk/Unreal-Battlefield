@@ -10,28 +10,25 @@ package WarZone;
  * @author 19712
  */
 public class AirBase {
-    
-    int payLoadAirBaseCapacity;
+
     private String airBaseName;
-    private static int number;
+    private static int number = 0;
 
-    AirBase(int capacity) {
-        
-        this.airBaseName = "Air Base-"+(++number);
-        this.payLoadAirBaseCapacity=capacity;
+    AirBase() {
+        this.airBaseName = "Air Base-" + (++number);
     }
 
-    public int getPayLoadAirBaseCapacity() {
-        return payLoadAirBaseCapacity;
+    public String getAirBaseName() {
+        return airBaseName;
     }
 
-    public void setPayLoadAirBaseCapacity(int payLoadAirBaseCapacity) {
-        this.payLoadAirBaseCapacity = payLoadAirBaseCapacity;
+    public void setAirBaseName(String airBaseName) {
+        this.airBaseName = airBaseName;
     }
-    
+
     @Override
-	public String toString() {
-		return this.airBaseName ;
-	}
-    
+    public String toString() {
+        return this.airBaseName;
+    }
+
 }

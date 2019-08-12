@@ -23,11 +23,17 @@ public class WarZoneSimulatorDirectory {
     private final Random r = new Random();
     private DroneDirectory droneDirectory;
     private TargetDirectory targetDirectory;
+    private AirBaseDirectory airbaseDirectory;
     
-    public WarZoneSimulatorDirectory(int targets, int drones, int minb, int maxb) {
+    public WarZoneSimulatorDirectory(int targets, int drones, int minb, int maxb, int airbase) {
         this.TOTAL_TARGETS = targets;
         this.TOTAL_DRONES = drones;
-
+        
+        airbaseDirectory = new AirBaseDirectory();
+        for(int i=0; i<airbase; i++) {
+            airbaseDirectory.addAirBase();
+        }
+        
         adjMatrix = new double[TOTAL_TARGETS + 1][TOTAL_TARGETS + 1];
 
         for (int i = 0; i < TOTAL_TARGETS + 1; i++) {
@@ -50,7 +56,7 @@ public class WarZoneSimulatorDirectory {
             int demand = generateCapacity(minb, maxb);
             targetDirectory.addTarget(demand);
         }
-        
+        printDistanceMatrix();
     }
     
     public Map<String, List<Integer>> findStrikeRoute(int[] optimalRoute) {
@@ -92,14 +98,14 @@ public class WarZoneSimulatorDirectory {
     }
 
     public void printDistanceMatrix() {
-        System.out.print("\tStation\t");
-        for (int k = 0; k < 10; k++) {
-            System.out.print("Target" + (k + 1) + "\t");
+        System.out.print("Station\t");
+        for (int k = 0; k < adjMatrix.length; k++) {
+            System.out.print((k == 0? "AB":"T" + (k)) + "\t");
         }
         System.out.println();
 
         for (int i = 0; i < adjMatrix.length; i++) {
-            System.out.print((i == 0 ? "Air Base" : "Targets" + i) + "\t");
+            System.out.print((i == 0 ? "AB" : "T" + i) + "\t");
             for (int j = 0; j < adjMatrix.length; j++) {
                 System.out.print(adjMatrix[i][j] + "\t");
             }

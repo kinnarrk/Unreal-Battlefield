@@ -20,10 +20,19 @@ public class AirBaseDirectory {
          airBaseDirectory = new ArrayList<AirBase>();
     }
     
-    public AirBase addAirBase(int aiBasePayLoad) {
-        AirBase airBase = new AirBase(aiBasePayLoad);
+    public AirBase addAirBase() {
+        AirBase airBase = new AirBase();
         airBaseDirectory.add(airBase);
         return airBase;
     }
 
+    public List<AirBase> getAirBaseDirectory() {
+        return airBaseDirectory;
+    }
+
+    public void setAirBaseDirectory(List<AirBase> airBaseDirectory) {
+        this.airBaseDirectory = airBaseDirectory;
+    }
+
+    
 }
