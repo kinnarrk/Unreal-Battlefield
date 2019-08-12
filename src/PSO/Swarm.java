@@ -80,7 +80,7 @@ public class Swarm {
     }
 
     public void printIterationResults(int t, Map<String, Map<Double, Double>> particleProgress) {
-        System.out.print(t + " \t\t");
+        System.out.print("|  " + (t+1) + " \t\t|\t");
         int pNo = 1;
         for (Particle p : this.getParticles()) {
             if (particleProgress.get("p" + pNo) == null) {
@@ -88,10 +88,10 @@ public class Swarm {
             }
 
             particleProgress.get("p" + pNo).put((double) t, p.getpBestValue());
-            System.out.print(p.getFitnessValue() + "\t" + p.getpBestValue() + "\t\t");
+            System.out.print(p.getFitnessValue() + "\t" + p.getpBestValue() + "\t\t|\t");
             pNo++;
         }
-        System.out.println(gValue);
+        System.out.println(gValue+"\t\t|");
     }
 
     public void optimizeSolutions() {
@@ -188,7 +188,7 @@ public class Swarm {
 		}
 		
                 double distance[] = Optimizer.copyFromRandomArray(optimalRoute);
-                System.out.println("Total Distance: "+getFitnessValue(distance));
+                System.out.println("Total Distance: "+getFitnessValue(distance) + " miles");
 		return optimalRoute;
 	}
 	

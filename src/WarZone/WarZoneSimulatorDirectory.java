@@ -35,7 +35,7 @@ public class WarZoneSimulatorDirectory {
                 if (i == j) {
                     adjMatrix[i][j] = 0;
                 } else {
-                    adjMatrix[i][j] = adjMatrix[j][i] = r.nextInt(1000) + 1;
+                    adjMatrix[i][j] = adjMatrix[j][i] = r.nextInt(100) + 1;
                 }
             }
         }
@@ -85,7 +85,7 @@ public class WarZoneSimulatorDirectory {
             }
             strikeRoute.add(0);
             totalTrips++;
-            hashMap.put(drones.get(i)+" \nPayload:" + drones.get(i).getPayLoadCapacity() + "\nTrips:" + totalTrips + "\nTotalDistance:" + totalDistance, strikeRoute);
+            hashMap.put(drones.get(i)+" \nPayload:" + drones.get(i).getPayLoadCapacity() + "\nTrips:" + totalTrips + "\nTotalDistance: " + totalDistance +" miles", strikeRoute);
         }
         return hashMap;
 

@@ -55,17 +55,22 @@ public class WarZoneSimulator {
         final Map<String, Map<Double, Double>> particleIterations = new HashMap<String, Map<Double, Double>>();
 
         //print iteration 0 results
-        System.out.print("Iteration\t");
+        System.out.print("|  Iteration(n)\t|\t");
         for (int i = 0; i < swarm.getParticles().size(); i++) {
-            System.out.print("f(x:" + (i + 1) + ") f(pBest:" + (i + 1) + ")\t");
+            System.out.print("p(" + (i + 1) + ")\tpBest(" + (i + 1) + ")\t|\t");
         }
 
-        System.out.println("f(gBest)");
+        System.out.println("f(gBest)\t|");
+        System.out.print("----------------|-------");
+        for (int i = 0; i < swarm.getParticles().size(); i++) {
+            System.out.print("------------------------|-------");
+        }
+        System.out.print("----------------|\n");
         swarm.printIterationResults(0, particleIterations);
 
-        final Thread thread[] = new Thread[TOTAL_ITERATIONS];
+        final Thread thread[] = new Thread[TOTAL_ITERATIONS-1];
         //Optimize the solution and return the best solution after the iterations terminate
-        for (int t = 1; t <= TOTAL_ITERATIONS; t++) {
+        for (int t = 1; t < TOTAL_ITERATIONS; t++) {
             final int tmp = t;
             thread[t - 1] = new Thread("Thread" + t) {
                 @Override
@@ -92,13 +97,13 @@ public class WarZoneSimulator {
             }
         }
 
-        System.out.println("Strike Path");
+        System.out.println("\n\nStrike Path");
         System.out.println("====================================================");
         
         int[] decodedStrikeRoute = swarm.decodeStrikeRoute();
         System.out.println("Strike Route : " + Arrays.toString(decodedStrikeRoute));
 
-        System.out.println("Drone Simulation with different payload");
+        System.out.println("\n\nDrone Simulation with different payload");
         System.out.println("====================================================");
         
         Map<String, List<Integer>> strikeRoute = directory.findStrikeRoute(decodedStrikeRoute);
