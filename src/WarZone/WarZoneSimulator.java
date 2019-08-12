@@ -31,13 +31,31 @@ public class WarZoneSimulator {
 
         final Swarm swarm = new Swarm(TARGET);
         swarm.setMap(directory.getAdjMatrix());
-
+        
+        System.out.println("----------------------------------------");
+        System.out.println("Drone Details");
+        System.out.println("----------------------------------------");
+        for(Drone d: directory.getDroneDirectory().getDrone()) {
+            System.out.println(d+" Payload Capacity:"+d.getPayLoadCapacity());
+        }
+        
+        System.out.println("----------------------------------------");
+        System.out.println("Target Details");
+        System.out.println("----------------------------------------");
+        for(Target t: directory.getTargetDirectory().getTarget()) {
+            System.out.println(t);
+        }
+        System.out.println("\n-------------------------------------------------");
+        System.out.println("Particle Swarm Optimization for for Battlefield");
+        System.out.println("-------------------------------------------------\n");
         int[] possiblePath = new int[TARGET];
 
         for (int i = 0; i < TARGET; i++) {
             possiblePath[i] = i + 1;
         }
 
+        
+        
         for (int i = 0; i < TOTAL_PARTICLES; i++) {
             Optimizer.randomArray(possiblePath);
             Particle p = swarm.addParticle(possiblePath);
