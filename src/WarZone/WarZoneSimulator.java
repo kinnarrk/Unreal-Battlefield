@@ -55,19 +55,39 @@ public class WarZoneSimulator {
         }
 
         
-        
+        final Thread threadArr[] = new Thread[TOTAL_PARTICLES];
         for (int i = 0; i < TOTAL_PARTICLES; i++) {
             Helper.shuffleArray(possiblePath);
-            Particle p = swarm.addParticle(possiblePath);
-
-            double fitnessValue = swarm.getFitnessValue(p.getPath());
-            p.setFitnessValue(fitnessValue);
+            final Particle p = swarm.addParticle(possiblePath);
+            final int temp = i;
+            threadArr[i] = new Thread("ParticleThread" + i) {
+                @Override
+                public void run() {
+                    try {                        
+                        if(temp>0){
+                            joinT(threadArr[temp-1]);                            
+                        }
+                        double fitnessValue = swarm.getFitnessValue(p.getPath());
+                        p.setFitnessValue(fitnessValue);
+//                        System.out.println("get f 1st done");
+                        double bestfitnessValue = swarm.getFitnessValue(p.getpBest());
+                        p.setpBestValue(bestfitnessValue);
+//                        System.out.println("get f 2nd done");
+                    } catch (Exception e) {}
+                }
+            };
+            threadArr[i].start();
+            
+//            double fitnessValue = swarm.getFitnessValue(p.getPath());
+//            p.setFitnessValue(fitnessValue);
 //            System.out.println("get f 1st done");
-            double bestfitnessValue = swarm.getFitnessValue(p.getpBest());
-            p.setpBestValue(bestfitnessValue);
+//            double bestfitnessValue = swarm.getFitnessValue(p.getpBest());
+//            p.setpBestValue(bestfitnessValue);
 //            System.out.println("get f 2nd done");
+            
         }
-
+        joinT(threadArr[TOTAL_PARTICLES-1]);        
+        
         swarm.findGlobalBest();
 
         final Map<String, Map<Double, Double>> particleIterations = new HashMap<String, Map<Double, Double>>();
@@ -90,30 +110,30 @@ public class WarZoneSimulator {
         //Optimize the solution and return the best solution after the iterations terminate
         for (int t = 1; t < TOTAL_ITERATIONS; t++) {
             final int tmp = t;
-            thread[t - 1] = new Thread("Thread" + t) {
-                @Override
-                public void run() {
-                    if (tmp > 1) {
-                        try {
+//            thread[t - 1] = new Thread("Thread" + t) {
+//                @Override
+//                public void run() {
+//                    if (tmp > 1) {
+//                        try {
 //                        thread[tmp - 2].join();
-
-                            this.sleep(tmp * 250);
-                        } catch (InterruptedException e) {
-                        }
-                    }
+//
+//                            this.sleep(tmp * 250);
+//                        } catch (InterruptedException e) {
+//                        }
+//                    }
                     swarm.optimizeSolutions();
                     swarm.printIterationResults(tmp, particleIterations);
 
-                }
-            };
-            thread[t - 1].start();
+//                }
+//            };
+//            thread[t - 1].start();
         }
-        for (Thread t : thread) {
-            try {
-                t.join();
-            } catch (InterruptedException e) {
-            }
-        }
+//        for (Thread t : thread) {
+//            try {
+//                t.join();
+//            } catch (InterruptedException e) {
+//            }
+//        }
 
         System.out.println("\n\nStrike Path");
         System.out.println("====================================================");
@@ -130,5 +150,11 @@ public class WarZoneSimulator {
             System.out.println(entry.getKey() + " \nStrike Route: " + entry.getValue());
             System.out.println("-------------------------------------------------------");
         }
+    }
+    
+    public static void joinT(Thread t){
+        try {
+            t.join();
+        } catch (InterruptedException e) {}
     }
 }
