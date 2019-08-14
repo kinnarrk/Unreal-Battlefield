@@ -14,13 +14,16 @@ import java.util.Random;
  * @author 19712
  */
 public class Target {
+
     int targetPayload;
     private String name;
     private static int no = 0;
-    
-    public Target(int payload){
-        this.name = "Target-"+(++no);
-        this.targetPayload=payload;
+    private Position position;
+
+    public Target(int payload) {
+        this.name = "Target-" + (++no);
+        this.targetPayload = payload;
+        position = new Position("Target");
     }
 
     public int getTargetPayload() {
@@ -30,14 +33,18 @@ public class Target {
     public void setTargetPayload(int targetPayload) {
         this.targetPayload = targetPayload;
     }
-    
-    
-    
+
+    public Position getPosition() {
+        return position;
+    }
+
+    public void setPosition(Position position) {
+        this.position = position;
+    }
+
     @Override
-	public String toString() {
-		return this.name+" Payload required:" + targetPayload ;
-	}
-   
-   
-    
+    public String toString() {
+        return this.name + " Payload required:" + targetPayload;
+    }
+
 }

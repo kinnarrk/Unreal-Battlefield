@@ -48,6 +48,26 @@ public class Swarm {
         return swarm;
     }
 
+//    public double getFitnessValue(double[] sol) {
+//
+//        int prevTarget = 0;
+//        double fitnessSum = 0;
+////        for(double d: sol){
+////            System.out.print(d+" ");
+////        }
+////        System.out.println("");
+//        for (int i = 0; i < sol.length; i++) {
+//            int v = (int) Math.round(sol[i]);
+////            System.out.println("prevTarget:" + prevTarget + ": v: " + v);
+//            fitnessSum += map[prevTarget][v];
+//            prevTarget = v;
+//        }
+//
+//        fitnessSum += map[prevTarget][0];
+//
+//        return fitnessSum;
+//    }
+    
     public double getFitnessValue(double[] sol) {
 
         int prevTarget = 0;
@@ -57,7 +77,7 @@ public class Swarm {
 //        }
 //        System.out.println("");
         for (int i = 0; i < sol.length; i++) {
-            int v = (int) Math.round(sol[i]);
+            int v = (int) Math.round(sol[i]) + 4;
 //            System.out.println("prevTarget:" + prevTarget + ": v: " + v);
             fitnessSum += map[prevTarget][v];
             prevTarget = v;
@@ -67,7 +87,7 @@ public class Swarm {
 
         return fitnessSum;
     }
-
+    
     public void findGlobalBest() {
         for (Particle p : this.getParticles()) {
             double pBest = p.getFitnessValue();
@@ -104,9 +124,12 @@ public class Swarm {
             // Updating position according new velocity
             updatePosition(p);
 
+//            double fitnessValue = getFitnessValue(p.getPath());
+//            p.setFitnessValue(fitnessValue);
+
             double fitnessValue = getFitnessValue(p.getPath());
             p.setFitnessValue(fitnessValue);
-
+            
             double path[] = Helper.replicateArray(p.getPath());
             double velocity[] = Helper.replicateArray(p.getpBestVelocity());
 
@@ -197,5 +220,4 @@ public class Swarm {
     public void setMap(double[][] map) {
         this.map = map;
     }
-
 }
