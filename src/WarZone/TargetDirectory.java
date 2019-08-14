@@ -29,5 +29,14 @@ public class TargetDirectory {
     public List<Target> getTarget() {
         return targetDirectory;
     }
+
+    public List<Target> getTargetDirectory() {
+        return targetDirectory;
+    }
+
+    public void setTargetDirectory(List<Target> targetDirectory) {
+        this.targetDirectory = targetDirectory;
+    }
+    
     
 }

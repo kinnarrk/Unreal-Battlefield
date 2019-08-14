@@ -25,7 +25,7 @@ public class WarZoneSimulator {
     private static final int MAX_TARGET_PAYLOAD = 5;
     private static final int TOTAL_PARTICLES = 30;
     private static final int TOTAL_ITERATIONS = 20;
-    private static final int TOTAL_AIRBASE = 4;
+    private static final int TOTAL_AIRBASE = 5;
 
     public static void main(String[] args) {
         WarZoneSimulatorDirectory directory = new WarZoneSimulatorDirectory(TARGET, TOTAL_DRONES, MIN_TARGET_PAYLOAD, MAX_TARGET_PAYLOAD, TOTAL_AIRBASE);
@@ -145,9 +145,11 @@ public class WarZoneSimulator {
         System.out.println("\n\nDrone Simulation with different payload");
         System.out.println("====================================================");
         
-        Map<String, List<Integer>> strikeRoute = directory.findStrikeRoute(decodedStrikeRoute);
+//        Map<String, List<Integer>> strikeRoute = directory.findStrikeRoute(decodedStrikeRoute);
 
-        for (Map.Entry<String, List<Integer>> entry : strikeRoute.entrySet()) {
+        Map<String, List<String>> strikeRoute = directory.findStrikeRoute(decodedStrikeRoute);
+
+        for (Map.Entry<String, List<String>> entry : strikeRoute.entrySet()) {
             System.out.println(entry.getKey() + " \nStrike Route: " + entry.getValue());
             System.out.println("-------------------------------------------------------");
         }

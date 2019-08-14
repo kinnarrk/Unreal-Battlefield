@@ -13,9 +13,14 @@ public class AirBase {
 
     private String airBaseName;
     private static int number = 0;
-
+    private Position position;
+    
     AirBase() {
         this.airBaseName = "Air Base-" + (++number);
+        if(number == 1)
+            position = new Position(0, 0);
+        else
+            position = new Position("Airbase");
     }
 
     public String getAirBaseName() {
@@ -26,6 +31,14 @@ public class AirBase {
         this.airBaseName = airBaseName;
     }
 
+    public Position getPosition() {
+        return position;
+    }
+
+    public void setPosition(Position position) {
+        this.position = position;
+    }
+    
     @Override
     public String toString() {
         return this.airBaseName;

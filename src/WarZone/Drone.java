@@ -10,14 +10,14 @@ package WarZone;
  * @author 19712
  */
 public class Drone {
-    
+
     int payLoadCapacity;
     private String name;
     private static int no;
-    
-    public Drone(int capacity){
-        this.name = "Drone-"+(++no);
-        this.payLoadCapacity=capacity;
+
+    public Drone(int capacity) {
+        this.name = "Drone-" + (++no);
+        this.payLoadCapacity = capacity;
     }
 
     public int getPayLoadCapacity() {
@@ -27,10 +27,9 @@ public class Drone {
     public void setPayLoadCapacity(int payLoadCapacity) {
         this.payLoadCapacity = payLoadCapacity;
     }
-    
-    
+
     @Override
-	public String toString() {
-		return this.name ;
-	}
+    public String toString() {
+        return this.name;
+    }
 }
