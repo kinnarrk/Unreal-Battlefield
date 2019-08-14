@@ -66,7 +66,7 @@ public class WarZoneSimulator {
                 public void run() {
                     try {                        
                         if(temp>0){
-                            joinT(threadArr[temp-1]);                            
+//                            joinT(threadArr[temp-1]);
                         }
                         double fitnessValue = swarm.getFitnessValue(p.getPath());
                         p.setFitnessValue(fitnessValue);
@@ -87,7 +87,11 @@ public class WarZoneSimulator {
 //            System.out.println("get f 2nd done");
             
         }
-        joinT(threadArr[TOTAL_PARTICLES-1]);        
+//        joinT(threadArr[TOTAL_PARTICLES-1]);
+        
+        for (Thread t : threadArr) {
+            joinT(t);
+        }
         
         swarm.findGlobalBest();
 
