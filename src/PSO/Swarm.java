@@ -212,7 +212,7 @@ public class Swarm {
 //                System.out.println("Total Distance: "+getFitnessValue(distance) + " miles");
         return strikeRoute;
     }
-
+    
     public double[][] getMap() {
         return map;
     }

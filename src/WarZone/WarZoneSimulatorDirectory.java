@@ -17,6 +17,7 @@ import java.util.Random;
  * @author bhaVYa
  */
 public class WarZoneSimulatorDirectory {
+
     int TOTAL_TARGETS;
     int TOTAL_DRONES;
     private double[][] adjMatrix;
@@ -25,36 +26,36 @@ public class WarZoneSimulatorDirectory {
     private TargetDirectory targetDirectory;
     private AirBaseDirectory airbaseDirectory;
     private int airbase;
-    
+
     public WarZoneSimulatorDirectory(int targets, int drones, int minb, int maxb, int airbase) {
         this.TOTAL_TARGETS = targets;
         this.TOTAL_DRONES = drones;
-        
+
         this.airbase = airbase;
         airbaseDirectory = new AirBaseDirectory();
-        for(int i=0; i<airbase; i++) {
+        for (int i = 0; i < airbase; i++) {
             airbaseDirectory.addAirBase();
         }
-        
-         droneDirectory = new DroneDirectory();
-        for(int i=0; i<drones; i++) {
-            droneDirectory.addDrone(6+i);
+
+        droneDirectory = new DroneDirectory();
+        for (int i = 0; i < drones; i++) {
+            droneDirectory.addDrone(6 + i);
         }
-        
+
         targetDirectory = new TargetDirectory();
-        for(int i=0; i<targets; i++) {
+        for (int i = 0; i < targets; i++) {
             int demand = generateCapacity(minb, maxb);
             targetDirectory.addTarget(demand);
         }
-        
+
         int total = TOTAL_TARGETS + airbase;
 //        adjMatrix = new double[TOTAL_TARGETS + 1][TOTAL_TARGETS + 1];
         adjMatrix = new double[total][total];
-        
+
         // Airbase to Airbase distance
-        for(int i=0; i<airbase; i++) {
+        for (int i = 0; i < airbase; i++) {
             AirBase airbase1 = airbaseDirectory.getAirBaseDirectory().get(i);
-            for(int j=0; j<airbase; j++) {
+            for (int j = 0; j < airbase; j++) {
                 AirBase airbase2 = airbaseDirectory.getAirBaseDirectory().get(j);
                 if (i == j) {
                     adjMatrix[i][j] = 0;
@@ -63,12 +64,12 @@ public class WarZoneSimulatorDirectory {
                 }
             }
         }
-        
+
         // Target to Target distance
-        for(int i=airbase; i<TOTAL_TARGETS+airbase; i++) {
-            Target target1 = targetDirectory.getTargetDirectory().get(i-airbase);
-            for(int j=airbase; j<TOTAL_TARGETS+airbase; j++) {
-                Target target2 = targetDirectory.getTargetDirectory().get(j-airbase);
+        for (int i = airbase; i < TOTAL_TARGETS + airbase; i++) {
+            Target target1 = targetDirectory.getTargetDirectory().get(i - airbase);
+            for (int j = airbase; j < TOTAL_TARGETS + airbase; j++) {
+                Target target2 = targetDirectory.getTargetDirectory().get(j - airbase);
                 if (i == j) {
                     adjMatrix[i][j] = 0;
                 } else {
@@ -76,17 +77,17 @@ public class WarZoneSimulatorDirectory {
                 }
             }
         }
-        
+
         // Airbase to Target distance
-        for(int i=0; i<airbase; i++) {
+        for (int i = 0; i < airbase; i++) {
             AirBase airbase1 = airbaseDirectory.getAirBaseDirectory().get(i);
-            for(int j=airbase; j<total; j++) {
-                Target target1 = targetDirectory.getTargetDirectory().get(j-airbase);
+            for (int j = airbase; j < total; j++) {
+                Target target1 = targetDirectory.getTargetDirectory().get(j - airbase);
                 adjMatrix[i][j] = adjMatrix[j][i] = getDistance(airbase1.getPosition(), target1.getPosition());
             }
         }
         printDistanceMatrix();
-        
+
 //        for (int i = 0; i < TOTAL_TARGETS + 1; i++) {
 //            for (int j = i; j < TOTAL_TARGETS + 1; j++) {
 //                if (i == j) {
@@ -96,10 +97,8 @@ public class WarZoneSimulatorDirectory {
 //                }
 //            }
 //        }
-        
-       
     }
-    
+
 //    public Map<String, List<Integer>> findStrikeRoute(int[] optimalRoute) {
 //        Map<String, List<Integer>> hashMap = new HashMap<String, List<Integer>>();
 //        List<Integer> strikeRoute;
@@ -137,24 +136,48 @@ public class WarZoneSimulatorDirectory {
 //        return hashMap;
 //
 //    }
-    
-    public Map<String, List<String>> findStrikeRoute(int[] optimalRoute) {
-        Map<String, List<String>> hashMap = new HashMap<String, List<String>>();
+   
+     public List<List<String>> decodeStrikeRouteWithParams(int[] route) {
+        List<List<String>> mainRoute = new ArrayList<List<String>>();
+        List<String> strikeRoute;
+        List<Target> targetDir = targetDirectory.getTargetDirectory();
+        for(int i=0; i<route.length; i++) {
+            strikeRoute = new ArrayList<String>();
+            Target t = targetDir.get(route[i]-1);
+            Position p = t.getPosition();
+            strikeRoute.add("T"+route[i]);
+            strikeRoute.add(String.valueOf(p.getLat()));
+            strikeRoute.add(String.valueOf(p.getLng()));
+            mainRoute.add(strikeRoute);
+        }
+        return mainRoute;
+    }
+     
+    public Map<String, List<List<String>>> findStrikeRoute(int[] optimalRoute) {
+        Map<String, List<List<String>>> hashMap = new HashMap<String, List<List<String>>>();
+        List<List<String>> parentRoute;
         List<String> strikeRoute;
         int totalTrips = 0;
         int totalDistance = 0;
         List<Drone> drones = droneDirectory.getDrone();
         int totalDrones = drones.size();
-        
+
         List<Target> targets = targetDirectory.getTarget();
         List<AirBase> airbases = airbaseDirectory.getAirBaseDirectory();
-        
+
         for (int i = 0; i < totalDrones; i++) {
             int avblCapacity = drones.get(i).getPayLoadCapacity();
+            parentRoute = new ArrayList<List<String>>();
             strikeRoute = new ArrayList<String>();
             AirBase airbase = airbases.get(0);
             Position pos = airbase.getPosition();
-            strikeRoute.add("AB0,"+pos.getLat()+","+pos.getLng()+","+avblCapacity+",0");
+//            strikeRoute.add("AB0,"+pos.getLat()+","+pos.getLng()+","+avblCapacity+",0");
+            strikeRoute.add("AB0");
+            strikeRoute.add(String.valueOf(pos.getLat()));
+            strikeRoute.add(String.valueOf(pos.getLng()));
+            strikeRoute.add(String.valueOf(avblCapacity));
+            strikeRoute.add("0");
+            parentRoute.add(strikeRoute);
             int from = 0;
             totalTrips = 0;
             totalDistance = 0;
@@ -162,66 +185,88 @@ public class WarZoneSimulatorDirectory {
                 int targetCapacity = targets.get(optimalRoute[j] - 1).getTargetPayload();
                 int to = optimalRoute[j] + 4;
                 if (avblCapacity - targetCapacity >= 0) {
-                    Target t1 = targets.get(optimalRoute[j]-1);
+                    Target t1 = targets.get(optimalRoute[j] - 1);
                     Position pos1 = t1.getPosition();
                     totalDistance += adjMatrix[from][to];
                     from = to;
                     avblCapacity -= targetCapacity;
-                    strikeRoute.add("T"+String.valueOf(optimalRoute[j])+","+pos1.getLat()+","+pos1.getLng()+","+avblCapacity+",1");
+                    strikeRoute = new ArrayList<String>();
+                    strikeRoute.add("T" + String.valueOf(optimalRoute[j]));
+                    strikeRoute.add(String.valueOf(pos1.getLat()));
+                    strikeRoute.add(String.valueOf(pos1.getLng()));
+                    strikeRoute.add(String.valueOf(avblCapacity));
+                    strikeRoute.add("1");
+                    parentRoute.add(strikeRoute);
+                    //strikeRoute.add("T"+String.valueOf(optimalRoute[j])+","+pos1.getLat()+","+pos1.getLng()+","+avblCapacity+",1");
                 } else {
                     totalTrips++;
                     avblCapacity = drones.get(i).getPayLoadCapacity();
                     int minDistance = getMinDistance(from);
                     AirBase airbase1 = airbases.get(minDistance);
                     Position pos1 = airbase1.getPosition();
-                    strikeRoute.add("AB"+minDistance+","+pos1.getLat()+","+pos1.getLng()+","+avblCapacity+",0");
+                    strikeRoute = new ArrayList<String>();
+                    strikeRoute.add("AB" + minDistance);
+                    strikeRoute.add(String.valueOf(pos1.getLat()));
+                    strikeRoute.add(String.valueOf(pos1.getLng()));
+                    strikeRoute.add(String.valueOf(avblCapacity));
+                    strikeRoute.add("0");
+                    parentRoute.add(strikeRoute);
+//                    strikeRoute.add("AB"+minDistance+","+pos1.getLat()+","+pos1.getLng()+","+avblCapacity+",0");
                     totalDistance += adjMatrix[from][minDistance];
                     from = minDistance;
                     j--;
                 }
             }
-            strikeRoute.add("AB0,"+pos.getLat()+","+pos.getLng()+","+avblCapacity+",0");
+            strikeRoute = new ArrayList<String>();
+            strikeRoute.add("AB0");
+            strikeRoute.add(String.valueOf(pos.getLat()));
+            strikeRoute.add(String.valueOf(pos.getLng()));
+            strikeRoute.add(String.valueOf(avblCapacity));
+            strikeRoute.add("0");
+            parentRoute.add(strikeRoute);
+//            strikeRoute.add("AB0,"+pos.getLat()+","+pos.getLng()+","+avblCapacity+",0");
             totalTrips++;
-            hashMap.put(drones.get(i)+" \nPayload:" + drones.get(i).getPayLoadCapacity() + "\nTrips:" + totalTrips + "\nTotalDistance: " + totalDistance +" miles", strikeRoute);
+            hashMap.put(drones.get(i) + " \nPayload:" + drones.get(i).getPayLoadCapacity() + "\nTrips:" + totalTrips + "\nTotalDistance: " + totalDistance + " miles", parentRoute);
         }
         return hashMap;
 
     }
-    
+
     public int getMinDistance(int index) {
-        int minValue = (int)adjMatrix[index][0];
+        int minValue = (int) adjMatrix[index][0];
         int min = 0;
-        for(int i=0; i<5; i++) {
-            if(minValue<(int)adjMatrix[index][i])
+        for (int i = 0; i < 5; i++) {
+            if (minValue < (int) adjMatrix[index][i]) {
                 min = i;
-                minValue = (int)adjMatrix[index][i];
+            }
+            minValue = (int) adjMatrix[index][i];
         }
         return min;
     }
-    
+
     public static double getDistance(Position p1, Position p2) {
         double x = p1.getLat() - p2.getLat();
         double y = p1.getLng() - p2.getLng();
-        double distance = Math.sqrt(x*x + y*y);
+        double distance = Math.sqrt(x * x + y * y);
         return Math.round(distance);
     }
 
     public void printDistanceMatrix() {
         System.out.print("Station\t");
         for (int k = 0; k < adjMatrix.length; k++) {
-            System.out.print((k < airbase? "AB"+k:"T" +(k - airbase + 1)) + "\t");
+            System.out.print((k < airbase ? "AB" + k : "T" + (k - airbase + 1)) + "\t");
         }
         System.out.println();
 
         for (int i = 0; i < adjMatrix.length; i++) {
-            System.out.print((i < airbase ? "AB"+i : "T" +(i - airbase + 1)) + "\t");
+            System.out.print((i < airbase ? "AB" + i : "T" + (i - airbase + 1)) + "\t");
             for (int j = 0; j < adjMatrix.length; j++) {
                 System.out.print(adjMatrix[i][j] + "\t");
             }
             System.out.println();
         }
     }
-    
+
 //    public void printDistanceMatrix() {
 //        System.out.print("Station\t");
 //        for (int k = 0; k < adjMatrix.length; k++) {
@@ -237,15 +282,14 @@ public class WarZoneSimulatorDirectory {
 //            System.out.println();
 //        }
 //    }
-    
     int generateCapacity(int min, int max) {
-        return r.nextInt(max-min)+min;
+        return r.nextInt(max - min) + min;
     }
 
     public double[][] getAdjMatrix() {
         return adjMatrix;
     }
-    
+
     public DroneDirectory getDroneDirectory() {
         return droneDirectory;
     }
@@ -261,6 +305,5 @@ public class WarZoneSimulatorDirectory {
     public void setTargetDirectory(TargetDirectory targetDirectory) {
         this.targetDirectory = targetDirectory;
     }
-    
-    
+
 }

@@ -23,7 +23,7 @@ public class WarZoneSimulator {
     private static final int TOTAL_DRONES = 5;
     private static final int MIN_TARGET_PAYLOAD = 1;
     private static final int MAX_TARGET_PAYLOAD = 5;
-    private static final int TOTAL_PARTICLES = 30;
+    private static final int TOTAL_PARTICLES = 50;
     private static final int TOTAL_ITERATIONS = 20;
     private static final int TOTAL_AIRBASE = 5;
 
@@ -145,15 +145,18 @@ public class WarZoneSimulator {
         
         int[] decodedStrikeRoute = swarm.decodeStrikeRoute();
         System.out.println("Optimal Strike Route : " + Arrays.toString(decodedStrikeRoute));
+        
+        List<List<String>> strikeWithParams = directory.decodeStrikeRouteWithParams(decodedStrikeRoute);
 
+        System.out.println(strikeWithParams);
         System.out.println("\n\nDrone Simulation with different payload");
         System.out.println("====================================================");
         
 //        Map<String, List<Integer>> strikeRoute = directory.findStrikeRoute(decodedStrikeRoute);
 
-        Map<String, List<String>> strikeRoute = directory.findStrikeRoute(decodedStrikeRoute);
+        Map<String, List<List<String>>> strikeRoute = directory.findStrikeRoute(decodedStrikeRoute);
 
-        for (Map.Entry<String, List<String>> entry : strikeRoute.entrySet()) {
+        for (Map.Entry<String, List<List<String>>> entry : strikeRoute.entrySet()) {
             System.out.println(entry.getKey() + " \nStrike Route: " + entry.getValue());
             System.out.println("-------------------------------------------------------");
         }
