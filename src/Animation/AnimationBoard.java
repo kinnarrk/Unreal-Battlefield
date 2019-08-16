@@ -35,13 +35,15 @@ public class AnimationBoard extends JPanel {
     private final int INITIAL_Y = B_HEIGHT-50;    
     private final int INITIAL_DELAY = 100;
     private final int PERIOD_INTERVAL = 25;
-    private final int SHIFT_FACTOR = 10;
+    private final int SHIFT_FACTOR = 20;
     private Shape circles[];
     private Shape squares[];    
     private Image star;
     private Image circle;
     private Image square;
+    private Image squaregreen;
     private Image explosion;
+    private Image background;
     private Timer timer;
     private int x, y;
     
@@ -52,14 +54,15 @@ public class AnimationBoard extends JPanel {
     private boolean lastPaint = false;
     
     private Map<String, List<List<String>>> hashMap;
-    private List<List<String>> parentRoute;
+    private final List<List<String>> parentRoute;
+    private final List<List<String>> initialPoints;
 //    private List<String> strikeRoute;
     
     AnimationStorage storage;
     
-    public AnimationBoard(List<List<String>> parentRoute) {
+    public AnimationBoard(List<List<String>> parentRoute, List<List<String>> initialPoints) {
         this.parentRoute = parentRoute;
-        
+        this.initialPoints = initialPoints;
         initBoard();        
     }
     
@@ -71,14 +74,17 @@ public class AnimationBoard extends JPanel {
         circle = ii.getImage();
         ii = new ImageIcon("src/resources/square.png");
         square = ii.getImage();
+        ii = new ImageIcon("src/resources/squaregreen.png");
+        squaregreen = ii.getImage();
         ii = new ImageIcon("src/resources/explosion.gif");
         explosion = ii.getImage();
         
+        background = Toolkit.getDefaultToolkit().createImage("src/resources/terrain800.jpg");
+        
     }
     
-    private void initBoard() {
-        
-        setBackground(Color.BLACK);
+    private void initBoard() {        
+//        setBackground(Color.BLACK);
         setPreferredSize(new Dimension(B_WIDTH, B_HEIGHT));
         circles = new Shape[parentRoute.size()];
         squares = new Shape[parentRoute.size()];
@@ -91,23 +97,27 @@ public class AnimationBoard extends JPanel {
         }
         timer = new Timer();
         timer.scheduleAtFixedRate(new ScheduleTask(), 
-                INITIAL_DELAY, PERIOD_INTERVAL);        
+                INITIAL_DELAY, PERIOD_INTERVAL);
+
+//        BufferedImage img = ImageIO.read(new File("src/resources/terrain.gif"));
     }
 
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
+        g.drawImage(background, 0, 0, this);
         Graphics2D g2 = (Graphics2D) g;        
         g2.setColor(Color.WHITE);        
         for(int i = 0; i < parentRoute.size(); i++) {
             List<String> strikeRoute = (ArrayList<String>)parentRoute.get(i);
             if(strikeRoute.get(4).equals("0")){
-                if(i == 0){
+                if(strikeRoute.get(0).equals("AB0")){
                     g2.setColor(Color.GREEN);
                     squares[i] = new Rectangle(Integer.parseInt(strikeRoute.get(1)), Integer.parseInt(strikeRoute.get(2)), 30, 30);                            
-                    g2.fill(squares[i]);
+                    g2.fill(squares[i]);                    
+//                    g.drawImage(squaregreen, Integer.parseInt(strikeRoute.get(1)), Integer.parseInt(strikeRoute.get(2)), this);
                     g2.setColor(Color.WHITE);
-                } else {
+                } else {                    
                     squares[i] = new Rectangle(Integer.parseInt(strikeRoute.get(1)), Integer.parseInt(strikeRoute.get(2)), 30, 30);                            
                     g2.fill(squares[i]);
                 }
@@ -119,11 +129,13 @@ public class AnimationBoard extends JPanel {
 //                    g2.setColor(Color.WHITE);
 //                }
             } else {
+                g2.setColor(Color.WHITE);
                 circles[i] = new Ellipse2D.Double(Double.parseDouble(strikeRoute.get(1)), Double.parseDouble(strikeRoute.get(2)), 20, 20);
     //            g.drawImage(circle, Integer.parseInt(strikeRoute.get(1)), Integer.parseInt(strikeRoute.get(2)), this);
                 g2.fill(circles[i]);
             }
             
+//            g2.setColor(Color.BLACK);
             if(i < parentRoute.size()-1){
                 List<String> strikeRoute2 = (ArrayList<String>)parentRoute.get(i+1);
                 drawDashedLine(g, Integer.parseInt(strikeRoute.get(1)), Integer.parseInt(strikeRoute.get(2)), Integer.parseInt(strikeRoute2.get(1)), Integer.parseInt(strikeRoute2.get(2)));
@@ -179,7 +191,7 @@ public class AnimationBoard extends JPanel {
         Graphics2D g2d = (Graphics2D) g.create();
 
         //set the stroke of the copy, not the original 
-        Stroke dashed = new BasicStroke(3, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0, new float[]{9}, 0);
+        Stroke dashed = new BasicStroke(2, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0, new float[]{9}, 0);
         g2d.setStroke(dashed);
         g2d.drawLine(x1, y1, x2, y2);
 
