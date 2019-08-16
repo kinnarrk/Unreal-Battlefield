@@ -99,6 +99,35 @@ public class WarZoneSimulatorDirectory {
 //        }
     }
 
+    public List<List<String>> getInitialPoints() {
+        List<List<String>> mainPoints = new ArrayList<List<String>>();
+        List<String> subPoints;
+        
+        int temp = 0;
+        for(AirBase a: airbaseDirectory.getAirBaseDirectory()) {
+            subPoints = new ArrayList<String>();
+            Position p = a.getPosition();
+            subPoints.add("AB"+(temp++));
+            subPoints.add(String.valueOf(p.getLat()));
+            subPoints.add(String.valueOf(p.getLng()));
+            subPoints.add("AB");
+            mainPoints.add(subPoints);
+        }
+        
+        temp = 0;
+        for(Target t: targetDirectory.getTargetDirectory()) {
+            subPoints = new ArrayList<String>();
+            Position p = t.getPosition();
+            subPoints.add("T"+(++temp));
+            subPoints.add(String.valueOf(p.getLat()));
+            subPoints.add(String.valueOf(p.getLng()));
+            subPoints.add("T");
+            mainPoints.add(subPoints);
+        }
+        
+        return mainPoints;
+    }
+    
 //    public Map<String, List<Integer>> findStrikeRoute(int[] optimalRoute) {
 //        Map<String, List<Integer>> hashMap = new HashMap<String, List<Integer>>();
 //        List<Integer> strikeRoute;

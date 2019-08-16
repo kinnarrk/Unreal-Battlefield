@@ -33,6 +33,10 @@ public class WarZoneSimulator {
         final Swarm swarm = new Swarm(TARGET);
         swarm.setMap(directory.getAdjMatrix());
         
+        List<List<String>> initialPoints = directory.getInitialPoints();
+        System.out.println("----------------------------------------");
+        System.out.println("Initial Points");
+        System.out.println(initialPoints);
         System.out.println("----------------------------------------");
         System.out.println("Drone Details");
         System.out.println("----------------------------------------");
