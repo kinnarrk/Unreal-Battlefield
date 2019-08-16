@@ -7,6 +7,7 @@ package WarZone;
 
 import Animation.AnimationStorage;
 import Animation.TimerAnimationUtility;
+import Graph.Graph;
 import PSO.Helper;
 import PSO.Particle;
 import PSO.Swarm;
@@ -34,9 +35,13 @@ public class WarZoneSimulator {
     public static void main(String[] args) {
         WarZoneSimulatorDirectory directory = new WarZoneSimulatorDirectory(TARGET, TOTAL_DRONES, MIN_TARGET_PAYLOAD, MAX_TARGET_PAYLOAD, TOTAL_AIRBASE);
 
-        final Swarm swarm = new Swarm(TARGET);
+        final Swarm swarm = new Swarm(TARGET, TOTAL_PARTICLES, TOTAL_ITERATIONS);
         swarm.setMap(directory.getAdjMatrix());
         
+        List<List<String>> initialPoints = directory.getInitialPoints();
+        System.out.println("----------------------------------------");
+        System.out.println("Initial Points");
+        System.out.println(initialPoints);
         System.out.println("----------------------------------------");
         System.out.println("Drone Details");
         System.out.println("----------------------------------------");
@@ -144,6 +149,10 @@ public class WarZoneSimulator {
 //            }
 //        }
 
+
+        // Getting array for particle progess to show in graph
+        double [][] graphArray = swarm.getGraphArray();
+        Graph graph = new Graph(graphArray);
         System.out.println("\n\nStrike Path");
         System.out.println("====================================================");
         
