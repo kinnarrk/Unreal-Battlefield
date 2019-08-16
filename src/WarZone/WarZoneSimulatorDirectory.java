@@ -207,6 +207,7 @@ public class WarZoneSimulatorDirectory {
             strikeRoute.add(String.valueOf((int)pos.getLng()));
             strikeRoute.add(String.valueOf(avblCapacity));
             strikeRoute.add("0");
+            strikeRoute.add(String.valueOf((int)avblFuel));
             parentRoute.add(strikeRoute);
             int from = 0;
             totalTrips = 0;
@@ -228,6 +229,7 @@ public class WarZoneSimulatorDirectory {
                     strikeRoute.add(String.valueOf((int)pos1.getLng()));
                     strikeRoute.add(String.valueOf(avblCapacity));
                     strikeRoute.add("1");
+                    strikeRoute.add(String.valueOf((int)avblFuel));
                     parentRoute.add(strikeRoute);
                     //strikeRoute.add("T"+String.valueOf(optimalRoute[j])+","+pos1.getLat()+","+pos1.getLng()+","+avblCapacity+",1");
                 } else {
@@ -243,6 +245,7 @@ public class WarZoneSimulatorDirectory {
                     strikeRoute.add(String.valueOf((int)pos1.getLng()));
                     strikeRoute.add(String.valueOf(avblCapacity));
                     strikeRoute.add("0");
+                    strikeRoute.add(String.valueOf((int)avblFuel));
                     parentRoute.add(strikeRoute);
 //                    strikeRoute.add("AB"+minDistance+","+pos1.getLat()+","+pos1.getLng()+","+avblCapacity+",0");
                     totalDistance += adjMatrix[from][minDistance];
@@ -256,6 +259,7 @@ public class WarZoneSimulatorDirectory {
             strikeRoute.add(String.valueOf((int)pos.getLng()));
             strikeRoute.add(String.valueOf((int)avblCapacity));
             strikeRoute.add("0");
+            strikeRoute.add(String.valueOf((int)avblFuel));
             parentRoute.add(strikeRoute);
 //            strikeRoute.add("AB0,"+pos.getLat()+","+pos.getLng()+","+avblCapacity+",0");
             totalTrips++;
