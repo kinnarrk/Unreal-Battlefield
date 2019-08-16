@@ -87,7 +87,7 @@ public class Swarm {
 
         fitnessSum += map[prevTarget][0];
 
-        return fitnessSum;
+        return Math.round(fitnessSum*100.0)/100.0;
     }
     
     public void findGlobalBest() {
@@ -111,7 +111,7 @@ public class Swarm {
 
             particleProgress.get("p" + pNo).put((double) t, p.getpBestValue());
             System.out.print(p.getFitnessValue() + "\t" + p.getpBestValue() + "\t\t|\t");
-            graphArray[pNo-1][t] = p.getFitnessValue();
+            graphArray[pNo-1][t] = p.getpBestValue();
             pNo++;
         }
         System.out.println(gValue + "\t\t|");

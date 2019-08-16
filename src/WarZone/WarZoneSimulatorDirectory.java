@@ -196,6 +196,7 @@ public class WarZoneSimulatorDirectory {
 
         for (int i = 0; i < totalDrones; i++) {
             int avblCapacity = drones.get(i).getPayLoadCapacity();
+            double avblFuel = drones.get(i).getFuel();
             parentRoute = new ArrayList<List<String>>();
             strikeRoute = new ArrayList<String>();
             AirBase airbase = airbases.get(0);
@@ -216,7 +217,9 @@ public class WarZoneSimulatorDirectory {
                 if (avblCapacity - targetCapacity >= 0) {
                     Target t1 = targets.get(optimalRoute[j] - 1);
                     Position pos1 = t1.getPosition();
-                    totalDistance += adjMatrix[from][to];
+                    double distance = adjMatrix[from][to];
+                    avblFuel -= distance/drones.get(i).getAvg();
+                    totalDistance += distance;
                     from = to;
                     avblCapacity -= targetCapacity;
                     strikeRoute = new ArrayList<String>();
@@ -230,6 +233,7 @@ public class WarZoneSimulatorDirectory {
                 } else {
                     totalTrips++;
                     avblCapacity = drones.get(i).getPayLoadCapacity();
+                    avblFuel = drones.get(i).getFuel();
                     int minDistance = getMinDistance(from);
                     AirBase airbase1 = airbases.get(minDistance);
                     Position pos1 = airbase1.getPosition();
@@ -277,7 +281,7 @@ public class WarZoneSimulatorDirectory {
         double x = p1.getLat() - p2.getLat();
         double y = p1.getLng() - p2.getLng();
         double distance = Math.sqrt(x * x + y * y);
-        return Math.round(distance);
+        return Math.round(distance*100.0)/100.0;
     }
 
     public void printDistanceMatrix() {
