@@ -28,13 +28,15 @@ public class Swarm {
     private static final double INERTIA = 0.659;
     private static final double CONGNITIVE = 0.213;
     private static final double SOCIAL = 0.247;
+    private double[][] graphArray;
     private Random r = new Random();
 
-    public Swarm(int targets) {
+    public Swarm(int targets, int particles, int iterations) {
         swarm = new ArrayList<Particle>();
 
         gBestPath = new double[targets];
         gBestVelocity = new double[targets];
+        graphArray = new double[particles][iterations];
         gValue = Double.MAX_VALUE;
     }
 
@@ -109,6 +111,7 @@ public class Swarm {
 
             particleProgress.get("p" + pNo).put((double) t, p.getpBestValue());
             System.out.print(p.getFitnessValue() + "\t" + p.getpBestValue() + "\t\t|\t");
+            graphArray[pNo-1][t] = p.getFitnessValue();
             pNo++;
         }
         System.out.println(gValue + "\t\t|");
@@ -220,4 +223,14 @@ public class Swarm {
     public void setMap(double[][] map) {
         this.map = map;
     }
+
+    public double[][] getGraphArray() {
+        return graphArray;
+    }
+
+    public void setGraphArray(double[][] graphArray) {
+        this.graphArray = graphArray;
+    }
+    
+    
 }
