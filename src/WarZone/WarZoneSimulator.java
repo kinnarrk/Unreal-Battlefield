@@ -5,6 +5,7 @@
  */
 package WarZone;
 
+import Graph.Graph;
 import PSO.Helper;
 import PSO.Particle;
 import PSO.Swarm;
@@ -147,7 +148,7 @@ public class WarZoneSimulator {
 
         // Getting array for particle progess to show in graph
         double [][] graphArray = swarm.getGraphArray();
-        
+        Graph graph = new Graph(graphArray);
         System.out.println("\n\nStrike Path");
         System.out.println("====================================================");
         

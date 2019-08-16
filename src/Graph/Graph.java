@@ -32,7 +32,7 @@ public class Graph extends ApplicationFrame {
     private static int TOTAL_ITERATIONS;
     private static double[][] result;
     private static int[] samples;
-    private static String[] particles = {};
+    private static String[] particles;
     
     public static JPanel createDemoPanel() {
         JFreeChart jfreechart = createChart();
@@ -48,7 +48,7 @@ public class Graph extends ApplicationFrame {
         lineandshaperenderer.setBaseToolTipGenerator(new StandardCategoryToolTipGenerator());
         CategoryPlot categoryplot = new CategoryPlot(categorydataset, categoryaxis, null, lineandshaperenderer);
         categoryplot.setDomainGridlinesVisible(true);
-        NumberAxis numberaxis = new NumberAxis("Distance (Miles)");
+        NumberAxis numberaxis = new NumberAxis("Fitness Value");
         CombinedRangeCategoryPlot combinedrangecategoryplot = new CombinedRangeCategoryPlot(numberaxis);
         combinedrangecategoryplot.add(categoryplot, 3);
         combinedrangecategoryplot.setOrientation(PlotOrientation.VERTICAL);
@@ -69,11 +69,12 @@ public class Graph extends ApplicationFrame {
         return defaultcategorydataset;
     }
 
-    public Graph(String title, double[][] graphArray) {
+    public Graph(double[][] graphArray) {
         super("Particle Progress");
         
         this.result = graphArray;
         
+        particles = new String[result.length];
         for(int i=0; i<result.length; i++) {
             particles[i] = "p"+(i+1);
         }
