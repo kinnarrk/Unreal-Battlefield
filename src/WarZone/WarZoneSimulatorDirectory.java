@@ -202,8 +202,8 @@ public class WarZoneSimulatorDirectory {
             Position pos = airbase.getPosition();
 //            strikeRoute.add("AB0,"+pos.getLat()+","+pos.getLng()+","+avblCapacity+",0");
             strikeRoute.add("AB0");
-            strikeRoute.add(String.valueOf(pos.getLat()));
-            strikeRoute.add(String.valueOf(pos.getLng()));
+            strikeRoute.add(String.valueOf((int)pos.getLat()));
+            strikeRoute.add(String.valueOf((int)pos.getLng()));
             strikeRoute.add(String.valueOf(avblCapacity));
             strikeRoute.add("0");
             parentRoute.add(strikeRoute);
@@ -221,8 +221,8 @@ public class WarZoneSimulatorDirectory {
                     avblCapacity -= targetCapacity;
                     strikeRoute = new ArrayList<String>();
                     strikeRoute.add("T" + String.valueOf(optimalRoute[j]));
-                    strikeRoute.add(String.valueOf(pos1.getLat()));
-                    strikeRoute.add(String.valueOf(pos1.getLng()));
+                    strikeRoute.add(String.valueOf((int)pos1.getLat()));
+                    strikeRoute.add(String.valueOf((int)pos1.getLng()));
                     strikeRoute.add(String.valueOf(avblCapacity));
                     strikeRoute.add("1");
                     parentRoute.add(strikeRoute);
@@ -235,8 +235,8 @@ public class WarZoneSimulatorDirectory {
                     Position pos1 = airbase1.getPosition();
                     strikeRoute = new ArrayList<String>();
                     strikeRoute.add("AB" + minDistance);
-                    strikeRoute.add(String.valueOf(pos1.getLat()));
-                    strikeRoute.add(String.valueOf(pos1.getLng()));
+                    strikeRoute.add(String.valueOf((int)pos1.getLat()));
+                    strikeRoute.add(String.valueOf((int)pos1.getLng()));
                     strikeRoute.add(String.valueOf(avblCapacity));
                     strikeRoute.add("0");
                     parentRoute.add(strikeRoute);
@@ -248,9 +248,9 @@ public class WarZoneSimulatorDirectory {
             }
             strikeRoute = new ArrayList<String>();
             strikeRoute.add("AB0");
-            strikeRoute.add(String.valueOf(pos.getLat()));
-            strikeRoute.add(String.valueOf(pos.getLng()));
-            strikeRoute.add(String.valueOf(avblCapacity));
+            strikeRoute.add(String.valueOf((int)pos.getLat()));
+            strikeRoute.add(String.valueOf((int)pos.getLng()));
+            strikeRoute.add(String.valueOf((int)avblCapacity));
             strikeRoute.add("0");
             parentRoute.add(strikeRoute);
 //            strikeRoute.add("AB0,"+pos.getLat()+","+pos.getLng()+","+avblCapacity+",0");

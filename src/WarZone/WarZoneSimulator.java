@@ -5,14 +5,18 @@
  */
 package WarZone;
 
+import Animation.AnimationStorage;
+import Animation.TimerAnimationUtility;
 import Graph.Graph;
 import PSO.Helper;
 import PSO.Particle;
 import PSO.Swarm;
+import java.awt.EventQueue;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.swing.JFrame;
 
 /**
  *
@@ -169,6 +173,17 @@ public class WarZoneSimulator {
             System.out.println(entry.getKey() + " \nStrike Route: " + entry.getValue());
             System.out.println("-------------------------------------------------------");
         }
+        
+        //For doing animation
+        AnimationStorage storage = new AnimationStorage();
+        storage.setHashMap(strikeRoute);
+        EventQueue.invokeLater(() -> {
+            for (List<List<String>> parentRoute: storage.getHashMap().values()){
+                JFrame ex = new TimerAnimationUtility(parentRoute);
+                ex.setVisible(true);
+                break;
+            }
+        });
     }
     
     public static void joinT(Thread t){

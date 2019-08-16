@@ -18,7 +18,7 @@ public class AirBase {
     AirBase() {
         this.airBaseName = "Air Base-" + (++number);
         if(number == 1)
-            position = new Position(0, 0);
+            position = new Position(400, 0);
         else
             position = new Position("Airbase");
     }

@@ -15,13 +15,13 @@ public class Position {
 
     private double lat;
     private double lng;
-    private static final int AIRBASE_MIN_LAT = -50;
-    private static final int AIRBASE_MAX_LAT = 50;
-    private static final int AIRBASE_MIN_LNG = 20;
-    private static final int AIRBASE_MAX_LNG = 70;
+    private static final int AIRBASE_MIN_LAT = 0;
+    private static final int AIRBASE_MAX_LAT = 800;
+    private static final int AIRBASE_MIN_LNG = 0;
+    private static final int AIRBASE_MAX_LNG = 800;
     private final AirBaseDirectory airbaseDirectory = new AirBaseDirectory();
     Random r = new Random();
-    private double[][] targetLocation = {{-100, -50, 20, 70}, {50, 100, 20, 70}, {-100, 100, 70, 120}};
+    private double[][] targetLocation = {{0, 300, 0, 400}, {0, 800, 400, 800}, {500, 800, 0, 400}};
     private final TargetDirectory targetDirectory = new TargetDirectory();
 
     Position(String type) {
