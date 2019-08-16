@@ -14,10 +14,14 @@ public class Drone {
     int payLoadCapacity;
     private String name;
     private static int no;
-
+    private double fuel;
+    private int avg; 
+            
     public Drone(int capacity) {
         this.name = "Drone-" + (++no);
         this.payLoadCapacity = capacity;
+        this.fuel = 200;
+        this.avg = 20;
     }
 
     public int getPayLoadCapacity() {
@@ -28,6 +32,24 @@ public class Drone {
         this.payLoadCapacity = payLoadCapacity;
     }
 
+    public double getFuel() {
+        return fuel;
+    }
+
+    public void setFuel(double fuel) {
+        this.fuel = fuel;
+    }
+
+    public int getAvg() {
+        return avg;
+    }
+
+    public void setAvg(int avg) {
+        this.avg = avg;
+    }
+
+    
+    
     @Override
     public String toString() {
         return this.name;

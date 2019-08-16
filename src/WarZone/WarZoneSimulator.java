@@ -29,7 +29,7 @@ public class WarZoneSimulator {
     private static final int MIN_TARGET_PAYLOAD = 1;
     private static final int MAX_TARGET_PAYLOAD = 5;
     private static final int TOTAL_PARTICLES = 50;
-    private static final int TOTAL_ITERATIONS = 20;
+    private static final int TOTAL_ITERATIONS = 40;
     private static final int TOTAL_AIRBASE = 5;
 
     public static void main(String[] args) {
