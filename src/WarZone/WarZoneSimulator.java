@@ -179,7 +179,7 @@ public class WarZoneSimulator {
         storage.setHashMap(strikeRoute);
         EventQueue.invokeLater(() -> {
             for (List<List<String>> parentRoute: storage.getHashMap().values()){
-                JFrame ex = new TimerAnimationUtility(parentRoute);
+                JFrame ex = new TimerAnimationUtility(parentRoute, directory.getInitialPoints());
                 ex.setVisible(true);
                 break;
             }
