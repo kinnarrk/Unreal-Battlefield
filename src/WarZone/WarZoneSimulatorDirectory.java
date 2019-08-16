@@ -108,8 +108,8 @@ public class WarZoneSimulatorDirectory {
             subPoints = new ArrayList<String>();
             Position p = a.getPosition();
             subPoints.add("AB"+(temp++));
-            subPoints.add(String.valueOf(p.getLat()));
-            subPoints.add(String.valueOf(p.getLng()));
+            subPoints.add(String.valueOf((int)p.getLat()));
+            subPoints.add(String.valueOf((int)p.getLng()));
             subPoints.add("AB");
             mainPoints.add(subPoints);
         }
@@ -119,8 +119,8 @@ public class WarZoneSimulatorDirectory {
             subPoints = new ArrayList<String>();
             Position p = t.getPosition();
             subPoints.add("T"+(++temp));
-            subPoints.add(String.valueOf(p.getLat()));
-            subPoints.add(String.valueOf(p.getLng()));
+            subPoints.add(String.valueOf((int)p.getLat()));
+            subPoints.add(String.valueOf((int)p.getLng()));
             subPoints.add("T");
             mainPoints.add(subPoints);
         }

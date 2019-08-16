@@ -16,15 +16,17 @@ import java.util.List;
 public class TimerAnimationUtility extends JFrame{
     AnimationStorage storage;
     List<List<String>> parentRoute;
+    List<List<String>> initialPoints;
     
-    public TimerAnimationUtility(List<List<String>> parentRoute) {
+    public TimerAnimationUtility(List<List<String>> parentRoute, List<List<String>> initialPoints) {
         this.parentRoute = parentRoute;
+        this.initialPoints = initialPoints;
         initUI();
     }
     
     private void initUI() {
         
-        add(new AnimationBoard(parentRoute));
+        add(new AnimationBoard(parentRoute, initialPoints));
                         
         setResizable(false);
         pack();
