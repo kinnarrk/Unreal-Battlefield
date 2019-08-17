@@ -26,6 +26,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
+import static psa_project.PSA_ProjectApp.logger;
 
 /**
  *
@@ -285,7 +286,9 @@ public class AnimationBoard extends JPanel {
         private void waitOnTarget(long millis, int xx, int yy, int idx2){
             try{
                 Thread.sleep(millis);
-            }catch(InterruptedException ex){}
+            }catch(InterruptedException ex){
+                logger.error("Thread interrupted exception", ex);
+            }
             x = xx;
             y = yy;
             idx = idx2;
