@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 2019-08-16 22:25:18 DEBUG PSA_ProjectApp:110 - Thread join complete after execution of pBest
 2019-08-16 22:25:18 DEBUG PSA_ProjectApp:114 - Global best process complete
@@ -19,3 +20,5 @@
 2019-08-16 22:51:18 DEBUG PSA_ProjectApp:153 - Graph display process complete
 2019-08-16 22:51:18 DEBUG PSA_ProjectApp:182 - Unreal battlefield animation start
 2019-08-16 22:51:18 DEBUG PSA_ProjectApp:193 - Unreal battlefield animation end
+=======
+>>>>>>> 956e138edfc84333bb794da43c1166487b99fc2f
