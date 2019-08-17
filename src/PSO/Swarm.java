@@ -12,6 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import javax.swing.JTextArea;
 
 /**
  *
@@ -30,10 +31,11 @@ public class Swarm {
     private static final double SOCIAL = 0.247;
     private double[][] graphArray;
     private Random r = new Random();
+    private JTextArea jtaOp;
 
-    public Swarm(int targets, int particles, int iterations) {
+    public Swarm(int targets, int particles, int iterations, JTextArea jtaOp) {
         swarm = new ArrayList<Particle>();
-
+        this.jtaOp = jtaOp;
         gBestPath = new double[targets];
         gBestVelocity = new double[targets];
         graphArray = new double[particles][iterations];
@@ -103,6 +105,7 @@ public class Swarm {
 
     public void printIterationResults(int t, Map<String, Map<Double, Double>> particleProgress) {
         System.out.print("|  " + (t + 1) + " \t\t|\t");
+        jtaOp.append("|  " + (t + 1) + " \t\t|\t");
         int pNo = 1;
         for (Particle p : this.getParticles()) {
             if (particleProgress.get("p" + pNo) == null) {
@@ -111,10 +114,12 @@ public class Swarm {
 
             particleProgress.get("p" + pNo).put((double) t, p.getpBestValue());
             System.out.print(p.getFitnessValue() + "\t" + p.getpBestValue() + "\t\t|\t");
+            jtaOp.append(p.getFitnessValue() + "\t" + p.getpBestValue() + "\t\t|\t");
             graphArray[pNo-1][t] = p.getpBestValue();
             pNo++;
         }
         System.out.println(gValue + "\t\t|");
+        jtaOp.append(gValue + "\t\t|\n");
     }
 
     public void optimizeSolutions() {
@@ -182,7 +187,9 @@ public class Swarm {
     public int[] decodeStrikeRoute() {
 
         System.out.println("gFitnessValue=" + gValue);
+        jtaOp.append("gFitnessValue=" + gValue + "\n");
         System.out.println("gBest=" + Arrays.toString(gBestPath));
+        jtaOp.append("gBest=" + Arrays.toString(gBestPath)+"\n");
 
         Map<Double, List<Integer>> routes = new HashMap<>();
 

@@ -68,7 +68,7 @@ public class Graph extends ApplicationFrame {
         return defaultcategorydataset;
     }
 
-    public Graph(double[][] graphArray) {
+    public Graph(double[][] graphArray, JPanel jpChart) {
         super("Particle Progress");
         
         this.result = graphArray;
@@ -81,10 +81,12 @@ public class Graph extends ApplicationFrame {
         chartpanel.setPreferredSize(new Dimension(1000, 600));
         setContentPane(chartpanel);
         
-        
+        jpChart.add(chartpanel);
+        jpChart.repaint();
+        jpChart.revalidate();
         this.pack();
         RefineryUtilities.centerFrameOnScreen(this);
-        this.setVisible(true);
+//        this.setVisible(true);
         
         
         

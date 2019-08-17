@@ -8,6 +8,7 @@ package Animation;
 import javax.swing.JFrame;
 import java.awt.EventQueue;
 import java.util.List;
+import javax.swing.JPanel;
 
 /**
  *
