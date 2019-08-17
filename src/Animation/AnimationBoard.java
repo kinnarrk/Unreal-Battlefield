@@ -129,13 +129,6 @@ public class AnimationBoard extends JPanel {
                     squares2[i] = new Rectangle(Integer.parseInt(strikeRoute.get(1)), Integer.parseInt(strikeRoute.get(2)), 30, 30);                            
                     g2.fill(squares2[i]);
                 }
-//                if(i == 0){
-//                    g2.setColor(Color.GREEN);
-////                    Shape initCircle = new Ellipse2D.Double(Double.parseDouble(strikeRoute.get(1))+5, Double.parseDouble(strikeRoute.get(2))+5, 20, 20);
-//                    g2.fillOval(Integer.parseInt(strikeRoute.get(1))+20, Integer.parseInt(strikeRoute.get(2))+20, 20, 20);
-////                    g2.fillOval(initCircle);
-//                    g2.setColor(Color.WHITE);
-//                }
             } else {
                 g2.setColor(Color.WHITE);
                 circles2[i] = new Ellipse2D.Double(Double.parseDouble(strikeRoute.get(1)), Double.parseDouble(strikeRoute.get(2)), 20, 20);
@@ -157,13 +150,6 @@ public class AnimationBoard extends JPanel {
                     squares[i] = new Rectangle(Integer.parseInt(strikeRoute.get(1)), Integer.parseInt(strikeRoute.get(2)), 30, 30);                            
                     g2.fill(squares[i]);
                 }
-//                if(i == 0){
-//                    g2.setColor(Color.GREEN);
-////                    Shape initCircle = new Ellipse2D.Double(Double.parseDouble(strikeRoute.get(1))+5, Double.parseDouble(strikeRoute.get(2))+5, 20, 20);
-//                    g2.fillOval(Integer.parseInt(strikeRoute.get(1))+20, Integer.parseInt(strikeRoute.get(2))+20, 20, 20);
-////                    g2.fillOval(initCircle);
-//                    g2.setColor(Color.WHITE);
-//                }
             } else {
                 g2.setColor(Color.WHITE);
                 circles[i] = new Ellipse2D.Double(Double.parseDouble(strikeRoute.get(1)), Double.parseDouble(strikeRoute.get(2)), 20, 20);
@@ -227,8 +213,6 @@ public class AnimationBoard extends JPanel {
                 g2.fill(circles[i]);
                 g.drawImage(explosion, Integer.parseInt(strikeRoute.get(1))-5, Integer.parseInt(strikeRoute.get(2))-10, this);
             }
-//            if(i == (idx-1))
-//                g2.fill(circles[i+1]);
         }
         if(lastPaint){
             for(int i = 1; i < parentRoute.size(); i++) {
@@ -239,13 +223,9 @@ public class AnimationBoard extends JPanel {
     //                g.drawImage(explosion, parentRoute[i]-5, arry[i]-10, this);
                 }
             }
-//            g2.fill(circles[arrx.length-1]);
-//            g.drawImage(explosion, arrx[arrx.length-1]-5, arry[arrx.length-1]-10, this);
                         
         }
-//        if(lastPaint && idx == 1){
-//            lastPaint = false;
-//        }
+
         Toolkit.getDefaultToolkit().sync();
     }
     
@@ -278,19 +258,8 @@ public class AnimationBoard extends JPanel {
             } else if(y<Integer.parseInt(strikeRoute.get(2))){
                 y+=((Integer.parseInt(strikeRoute.get(2))-y)/SHIFT_FACTOR);                
             }
-//            System.out.println("new x: " + x);
-//            System.out.println("new y: " + y);
             
             if(x == Integer.parseInt(strikeRoute.get(1))-SHIFT_FACTOR || x == Integer.parseInt(strikeRoute.get(1))+SHIFT_FACTOR || y == Integer.parseInt(strikeRoute.get(2))+SHIFT_FACTOR || y == Integer.parseInt(strikeRoute.get(2))-SHIFT_FACTOR){
-//                System.out.println("got x or y equal to point");
-                
-//                waitOnTarget(2000, x, y, idx);
-//                try{
-//                    timer.wait(2000);
-//                    wait(2000);
-//                    this.wait(2000);
-//                    this.sleep(2000);
-//                }catch(InterruptedException ex){}
 
                 x = Integer.parseInt(strikeRoute.get(1));
                 y = Integer.parseInt(strikeRoute.get(2));
@@ -308,18 +277,8 @@ public class AnimationBoard extends JPanel {
 //                }
             }            
             if(lastPaint && idx == 1){
-//                repaint();
                 timer.cancel();
-//                repaint();
-            }
-            
-//            x += 1;
-//            y += 1;
-
-//            if (y > B_HEIGHT) {
-//                y = INITIAL_Y;
-//                x = INITIAL_X;
-//            }
+            }           
             
             repaint();
         }
