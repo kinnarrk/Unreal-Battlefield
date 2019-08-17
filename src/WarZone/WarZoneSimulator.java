@@ -96,6 +96,7 @@ public class WarZoneSimulator {
                         double bestfitnessValue = swarm.getFitnessValue(p.getpBest());
                         p.setpBestValue(bestfitnessValue);
                     } catch (Exception e) {
+                        logger.error("Particle Thread exception", e);
                     }
                 }
             };
@@ -105,9 +106,13 @@ public class WarZoneSimulator {
         for (Thread t : threadArr) {
             joinT(t);
         }
+        
+        logger.debug("Thread join complete after execution of pBest");
 
         swarm.findGlobalBest();
 
+        logger.debug("Global best process complete");
+        
         final Map<String, Map<Double, Double>> particleIterations = new HashMap<String, Map<Double, Double>>();
 
         // Print result for iterations
@@ -138,10 +143,15 @@ public class WarZoneSimulator {
             swarm.printIteration(tmp, particleIterations);
 
         }
+        
+        logger.debug("Iterations complete");
 
         // Getting array for particle progess to show in graph
         double[][] graphArray = swarm.getGraphArray();
         Graph graph = new Graph(graphArray, jpChart);
+        
+        logger.debug("Graph display process complete");
+        
         System.out.println("\n\nStrike Path");
         jtaOp.append("\n\nStrike Path\n");
         System.out.println("====================================================");
@@ -169,26 +179,26 @@ public class WarZoneSimulator {
             jtaOp.append("-------------------------------------------------------\n");
         }
 
+        logger.debug("Unreal battlefield animation start");
         //For doing animation
         AnimationStorage storage = new AnimationStorage();
         storage.setHashMap(strikeRoute);
         EventQueue.invokeLater(() -> {
             for (List<List<String>> parentRoute : storage.getHashMap().values()) {
                 JFrame ex = new TimerAnimationUtility(parentRoute, directory.getInitialPoints());
-//                jpAnimation.add(ex);
-//                jpAnimation.repaint();
-//                jpAnimation.revalidate();
                 ex.setVisible(true);
                 break;
             }
         });
-        logger.error("test error", new NullPointerException());
+        logger.debug("Unreal battlefield animation end");
+        
     }
 
     public static void joinT(Thread t) {
         try {
             t.join();
         } catch (InterruptedException e) {
+            logger.error("Thread interrupted exception in joining thread of particles", e);
         }
     }
 }
