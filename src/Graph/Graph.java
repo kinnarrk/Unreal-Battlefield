@@ -78,7 +78,7 @@ public class Graph extends ApplicationFrame {
             particles[i] = "p"+(i+1);
         }
         ChartPanel chartpanel = new ChartPanel(createChart());
-        chartpanel.setPreferredSize(new Dimension(1000, 600));
+        chartpanel.setPreferredSize(new Dimension(1100, 750));
         setContentPane(chartpanel);
         
         jpChart.add(chartpanel);

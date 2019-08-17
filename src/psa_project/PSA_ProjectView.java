@@ -146,11 +146,11 @@ public class PSA_ProjectView extends FrameView {
         jpChart.setLayout(jpChartLayout);
         jpChartLayout.setHorizontalGroup(
             jpChartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 984, Short.MAX_VALUE)
+            .addGap(0, 1098, Short.MAX_VALUE)
         );
         jpChartLayout.setVerticalGroup(
             jpChartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 736, Short.MAX_VALUE)
+            .addGap(0, 752, Short.MAX_VALUE)
         );
 
         jScrollPane2.setViewportView(jpChart);
@@ -167,7 +167,7 @@ public class PSA_ProjectView extends FrameView {
             .addGroup(mainPanelLayout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 425, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 638, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane2))
         );
 
         menuBar.setName("menuBar"); // NOI18N
