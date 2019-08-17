@@ -63,7 +63,6 @@ public class Graph extends ApplicationFrame {
             for (int j = 0; j < result[i].length; j++) {
                 defaultcategorydataset.addValue(result[i][j], particles[i], j+1 + "");
             }
-            System.out.println("");
         }
 
         return defaultcategorydataset;

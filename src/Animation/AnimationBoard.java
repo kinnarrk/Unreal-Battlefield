@@ -8,6 +8,8 @@ package Animation;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -16,6 +18,7 @@ import java.awt.Shape;
 import java.awt.Stroke;
 import java.awt.Toolkit;
 import java.awt.geom.Ellipse2D;
+import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -37,7 +40,9 @@ public class AnimationBoard extends JPanel {
     private final int PERIOD_INTERVAL = 25;
     private final int SHIFT_FACTOR = 20;
     private Shape circles[];
-    private Shape squares[];    
+    private Shape squares[];
+    private Shape circles2[];
+    private Shape squares2[];
     private Image star;
     private Image circle;
     private Image square;
@@ -88,6 +93,8 @@ public class AnimationBoard extends JPanel {
         setPreferredSize(new Dimension(B_WIDTH, B_HEIGHT));
         circles = new Shape[parentRoute.size()];
         squares = new Shape[parentRoute.size()];
+        circles2 = new Shape[initialPoints.size()];
+        squares2 = new Shape[initialPoints.size()];
         loadImage();
 
         if(parentRoute.size() > 0) {
@@ -107,7 +114,36 @@ public class AnimationBoard extends JPanel {
         super.paintComponent(g);
         g.drawImage(background, 0, 0, this);
         Graphics2D g2 = (Graphics2D) g;        
-        g2.setColor(Color.WHITE);        
+        g2.setColor(Color.WHITE);
+        
+        for(int i = 0; i < initialPoints.size(); i++) {
+            List<String> strikeRoute = (ArrayList<String>)initialPoints.get(i);
+            if(strikeRoute.get(3).equals("AB")){
+                if(strikeRoute.get(0).equals("AB0")){
+                    g2.setColor(Color.GREEN);
+                    squares2[i] = new Rectangle(Integer.parseInt(strikeRoute.get(1)), Integer.parseInt(strikeRoute.get(2)), 30, 30);                            
+                    g2.fill(squares2[i]);                    
+//                    g.drawImage(squaregreen, Integer.parseInt(strikeRoute.get(1)), Integer.parseInt(strikeRoute.get(2)), this);
+                    g2.setColor(Color.WHITE);
+                } else {                    
+                    squares2[i] = new Rectangle(Integer.parseInt(strikeRoute.get(1)), Integer.parseInt(strikeRoute.get(2)), 30, 30);                            
+                    g2.fill(squares2[i]);
+                }
+//                if(i == 0){
+//                    g2.setColor(Color.GREEN);
+////                    Shape initCircle = new Ellipse2D.Double(Double.parseDouble(strikeRoute.get(1))+5, Double.parseDouble(strikeRoute.get(2))+5, 20, 20);
+//                    g2.fillOval(Integer.parseInt(strikeRoute.get(1))+20, Integer.parseInt(strikeRoute.get(2))+20, 20, 20);
+////                    g2.fillOval(initCircle);
+//                    g2.setColor(Color.WHITE);
+//                }
+            } else {
+                g2.setColor(Color.WHITE);
+                circles2[i] = new Ellipse2D.Double(Double.parseDouble(strikeRoute.get(1)), Double.parseDouble(strikeRoute.get(2)), 20, 20);
+    //            g.drawImage(circle, Integer.parseInt(strikeRoute.get(1)), Integer.parseInt(strikeRoute.get(2)), this);
+                g2.fill(circles2[i]);
+            }           
+        }
+        
         for(int i = 0; i < parentRoute.size(); i++) {
             List<String> strikeRoute = (ArrayList<String>)parentRoute.get(i);
             if(strikeRoute.get(4).equals("0")){
@@ -153,7 +189,31 @@ public class AnimationBoard extends JPanel {
     private void drawStar(Graphics g) {
         
         g.drawImage(star, x, y, this);
-        Graphics2D g2 = (Graphics2D) g;
+        Graphics2D g2 = (Graphics2D) g;        
+        List<String> strikeRoute2;
+        if(idx == 0)
+            strikeRoute2 = (ArrayList<String>)parentRoute.get(0);
+        else
+            strikeRoute2 = (ArrayList<String>)parentRoute.get(idx-1);
+        String str = "Payloads available: " + strikeRoute2.get(3);
+        Font font = new Font("Serif", Font.BOLD, 16);
+        g2.setFont(font);
+        Color textColor = Color.WHITE;
+        Color bgColor = Color.BLACK;
+        int xx = x+40;
+        int yy = y+23;
+
+        FontMetrics fm = g.getFontMetrics();
+        Rectangle2D rect = fm.getStringBounds(str, g);
+
+        g.setColor(bgColor);
+        g.fillRect(xx,
+                   yy - fm.getAscent(),
+                   (int) rect.getWidth(),
+                   (int) rect.getHeight());
+
+        g.setColor(textColor);
+        g2.drawString(str, x+40, y+20);
         g2.setColor(Color.RED);
         for(int i = 1; i < idx; i++) {
             List<String> strikeRoute = (ArrayList<String>)parentRoute.get(i);

@@ -108,8 +108,8 @@ public class WarZoneSimulatorDirectory {
             subPoints = new ArrayList<String>();
             Position p = a.getPosition();
             subPoints.add("AB"+(temp++));
-            subPoints.add(String.valueOf(p.getLat()));
-            subPoints.add(String.valueOf(p.getLng()));
+            subPoints.add(String.valueOf((int)p.getLat()));
+            subPoints.add(String.valueOf((int)p.getLng()));
             subPoints.add("AB");
             mainPoints.add(subPoints);
         }
@@ -119,8 +119,8 @@ public class WarZoneSimulatorDirectory {
             subPoints = new ArrayList<String>();
             Position p = t.getPosition();
             subPoints.add("T"+(++temp));
-            subPoints.add(String.valueOf(p.getLat()));
-            subPoints.add(String.valueOf(p.getLng()));
+            subPoints.add(String.valueOf((int)p.getLat()));
+            subPoints.add(String.valueOf((int)p.getLng()));
             subPoints.add("T");
             mainPoints.add(subPoints);
         }
@@ -196,6 +196,7 @@ public class WarZoneSimulatorDirectory {
 
         for (int i = 0; i < totalDrones; i++) {
             int avblCapacity = drones.get(i).getPayLoadCapacity();
+            double avblFuel = drones.get(i).getFuel();
             parentRoute = new ArrayList<List<String>>();
             strikeRoute = new ArrayList<String>();
             AirBase airbase = airbases.get(0);
@@ -206,6 +207,7 @@ public class WarZoneSimulatorDirectory {
             strikeRoute.add(String.valueOf((int)pos.getLng()));
             strikeRoute.add(String.valueOf(avblCapacity));
             strikeRoute.add("0");
+            strikeRoute.add(String.valueOf((int)avblFuel));
             parentRoute.add(strikeRoute);
             int from = 0;
             totalTrips = 0;
@@ -216,7 +218,9 @@ public class WarZoneSimulatorDirectory {
                 if (avblCapacity - targetCapacity >= 0) {
                     Target t1 = targets.get(optimalRoute[j] - 1);
                     Position pos1 = t1.getPosition();
-                    totalDistance += adjMatrix[from][to];
+                    double distance = adjMatrix[from][to];
+                    avblFuel -= distance/drones.get(i).getAvg();
+                    totalDistance += distance;
                     from = to;
                     avblCapacity -= targetCapacity;
                     strikeRoute = new ArrayList<String>();
@@ -225,11 +229,13 @@ public class WarZoneSimulatorDirectory {
                     strikeRoute.add(String.valueOf((int)pos1.getLng()));
                     strikeRoute.add(String.valueOf(avblCapacity));
                     strikeRoute.add("1");
+                    strikeRoute.add(String.valueOf((int)avblFuel));
                     parentRoute.add(strikeRoute);
                     //strikeRoute.add("T"+String.valueOf(optimalRoute[j])+","+pos1.getLat()+","+pos1.getLng()+","+avblCapacity+",1");
                 } else {
                     totalTrips++;
                     avblCapacity = drones.get(i).getPayLoadCapacity();
+                    avblFuel = drones.get(i).getFuel();
                     int minDistance = getMinDistance(from);
                     AirBase airbase1 = airbases.get(minDistance);
                     Position pos1 = airbase1.getPosition();
@@ -239,6 +245,7 @@ public class WarZoneSimulatorDirectory {
                     strikeRoute.add(String.valueOf((int)pos1.getLng()));
                     strikeRoute.add(String.valueOf(avblCapacity));
                     strikeRoute.add("0");
+                    strikeRoute.add(String.valueOf((int)avblFuel));
                     parentRoute.add(strikeRoute);
 //                    strikeRoute.add("AB"+minDistance+","+pos1.getLat()+","+pos1.getLng()+","+avblCapacity+",0");
                     totalDistance += adjMatrix[from][minDistance];
@@ -252,6 +259,7 @@ public class WarZoneSimulatorDirectory {
             strikeRoute.add(String.valueOf((int)pos.getLng()));
             strikeRoute.add(String.valueOf((int)avblCapacity));
             strikeRoute.add("0");
+            strikeRoute.add(String.valueOf((int)avblFuel));
             parentRoute.add(strikeRoute);
 //            strikeRoute.add("AB0,"+pos.getLat()+","+pos.getLng()+","+avblCapacity+",0");
             totalTrips++;
@@ -277,7 +285,7 @@ public class WarZoneSimulatorDirectory {
         double x = p1.getLat() - p2.getLat();
         double y = p1.getLng() - p2.getLng();
         double distance = Math.sqrt(x * x + y * y);
-        return Math.round(distance);
+        return Math.round(distance*100.0)/100.0;
     }
 
     public void printDistanceMatrix() {
