@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import javax.swing.JTextArea;
 
 /**
  *
@@ -26,11 +27,12 @@ public class WarZoneSimulatorDirectory {
     private TargetDirectory targetDirectory;
     private AirBaseDirectory airbaseDirectory;
     private int airbase;
+    private JTextArea jtaOp;
 
-    public WarZoneSimulatorDirectory(int targets, int drones, int minb, int maxb, int airbase) {
+    public WarZoneSimulatorDirectory(int targets, int drones, int minb, int maxb, int airbase, JTextArea jtaOp) {
         this.TOTAL_TARGETS = targets;
         this.TOTAL_DRONES = drones;
-
+        this.jtaOp = jtaOp;
         this.airbase = airbase;
         airbaseDirectory = new AirBaseDirectory();
         for (int i = 0; i < airbase; i++) {
@@ -290,17 +292,23 @@ public class WarZoneSimulatorDirectory {
 
     public void printDistanceMatrix() {
         System.out.print("Station\t");
+        jtaOp.append("Station\t");
         for (int k = 0; k < adjMatrix.length; k++) {
             System.out.print((k < airbase ? "AB" + k : "T" + (k - airbase + 1)) + "\t");
+            jtaOp.append((k < airbase ? "AB" + k : "T" + (k - airbase + 1)) + "\t");
         }
         System.out.println();
+        jtaOp.append("\n");
 
         for (int i = 0; i < adjMatrix.length; i++) {
             System.out.print((i < airbase ? "AB" + i : "T" + (i - airbase + 1)) + "\t");
+            jtaOp.append((i < airbase ? "AB" + i : "T" + (i - airbase + 1)) + "\t");
             for (int j = 0; j < adjMatrix.length; j++) {
                 System.out.print(adjMatrix[i][j] + "\t");
+                jtaOp.append(adjMatrix[i][j] + "\t");
             }
             System.out.println();
+            jtaOp.append("\n");
         }
     }
 

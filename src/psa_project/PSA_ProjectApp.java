@@ -4,6 +4,7 @@
 
 package psa_project;
 
+import org.apache.log4j.Logger;
 import org.jdesktop.application.Application;
 import org.jdesktop.application.SingleFrameApplication;
 
@@ -12,6 +13,7 @@ import org.jdesktop.application.SingleFrameApplication;
  */
 public class PSA_ProjectApp extends SingleFrameApplication {
 
+    public final static Logger logger = Logger.getLogger(PSA_ProjectApp.class);
     /**
      * At startup create and show the main frame of the application.
      */
