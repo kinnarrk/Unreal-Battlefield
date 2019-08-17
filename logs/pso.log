@@ -1,13 +1,22 @@
+<<<<<<< HEAD
+2019-08-16 21:45:00 ERROR PSA_ProjectApp:222 - test error
+java.lang.NullPointerException
+	at WarZone.WarZoneSimulator.main(WarZoneSimulator.java:222)
+=======
 2019-08-16 21:20:19 ERROR PSA_ProjectApp:185 - test error
 java.lang.NullPointerException
 	at WarZone.WarZoneSimulator.main(WarZoneSimulator.java:185)
+>>>>>>> 0eb39f7f5b6934b346d1c772a0e933fd43f8e263
 	at psa_project.PSA_ProjectView.mainPanelAncestorAdded(PSA_ProjectView.java:239)
 	at psa_project.PSA_ProjectView.access$800(PSA_ProjectView.java:23)
 	at psa_project.PSA_ProjectView$4.ancestorAdded(PSA_ProjectView.java:126)
 	at javax.swing.AncestorNotifier.fireAncestorAdded(AncestorNotifier.java:86)
 	at javax.swing.AncestorNotifier.componentShown(AncestorNotifier.java:193)
 	at java.awt.AWTEventMulticaster.componentShown(AWTEventMulticaster.java:180)
+<<<<<<< HEAD
+=======
 	at java.awt.AWTEventMulticaster.componentShown(AWTEventMulticaster.java:179)
+>>>>>>> 0eb39f7f5b6934b346d1c772a0e933fd43f8e263
 	at java.awt.Component.processComponentEvent(Component.java:6365)
 	at java.awt.Component.processEvent(Component.java:6313)
 	at java.awt.Container.processEvent(Container.java:2236)
@@ -21,6 +30,14 @@ java.lang.NullPointerException
 	at java.awt.EventQueue$3.run(EventQueue.java:709)
 	at java.awt.EventQueue$3.run(EventQueue.java:703)
 	at java.security.AccessController.doPrivileged(Native Method)
+<<<<<<< HEAD
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:76)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:86)
+	at java.awt.EventQueue$4.run(EventQueue.java:731)
+	at java.awt.EventQueue$4.run(EventQueue.java:729)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:76)
+=======
 	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:80)
 	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:90)
 	at java.awt.EventQueue$4.run(EventQueue.java:731)
@@ -63,6 +80,7 @@ java.lang.NullPointerException
 	at java.awt.EventQueue$4.run(EventQueue.java:729)
 	at java.security.AccessController.doPrivileged(Native Method)
 	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:80)
+>>>>>>> 0eb39f7f5b6934b346d1c772a0e933fd43f8e263
 	at java.awt.EventQueue.dispatchEvent(EventQueue.java:728)
 	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:201)
 	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:116)
