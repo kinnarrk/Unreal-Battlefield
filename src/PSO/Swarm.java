@@ -114,7 +114,9 @@ public class Swarm {
 
             particleProgress.get("p" + pNo).put((double) t, p.getpBestValue());
             System.out.print(p.getFitnessValue() + "\t" + p.getpBestValue() + "\t\t|\t");
+
             jtaOp.append(p.getFitnessValue() + "\t" + p.getpBestValue() + "\t\t|\t");
+
             graphArray[pNo-1][t] = p.getpBestValue();
             pNo++;
         }
