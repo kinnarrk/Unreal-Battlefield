@@ -195,6 +195,7 @@ public class AnimationBoard extends JPanel {
             strikeRoute2 = (ArrayList<String>)parentRoute.get(0);
         else
             strikeRoute2 = (ArrayList<String>)parentRoute.get(idx-1);
+
         String str = "Payloads available: " + strikeRoute2.get(3) + "   ";
         String str2 = "Fuel available: " + strikeRoute2.get(5) +" Gal";
         Font font = new Font("Serif", Font.BOLD, 16);
@@ -211,6 +212,7 @@ public class AnimationBoard extends JPanel {
         g.fillRect(xx,
                    yy - fm.getAscent(),
                    (int) rect.getWidth(),
+
                    (int) rect.getHeight()*2);
 
         g.setColor(textColor);
