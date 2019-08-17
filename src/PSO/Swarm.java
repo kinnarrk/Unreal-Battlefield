@@ -52,46 +52,21 @@ public class Swarm {
         return swarm;
     }
 
-//    public double getFitnessValue(double[] sol) {
-//
-//        int prevTarget = 0;
-//        double fitnessSum = 0;
-////        for(double d: sol){
-////            System.out.print(d+" ");
-////        }
-////        System.out.println("");
-//        for (int i = 0; i < sol.length; i++) {
-//            int v = (int) Math.round(sol[i]);
-////            System.out.println("prevTarget:" + prevTarget + ": v: " + v);
-//            fitnessSum += map[prevTarget][v];
-//            prevTarget = v;
-//        }
-//
-//        fitnessSum += map[prevTarget][0];
-//
-//        return fitnessSum;
-//    }
-    
     public double getFitnessValue(double[] sol) {
 
         int prevTarget = 0;
         double fitnessSum = 0;
-//        for(double d: sol){
-//            System.out.print(d+" ");
-//        }
-//        System.out.println("");
         for (int i = 0; i < sol.length; i++) {
             int v = (int) Math.round(sol[i]) + 4;
-//            System.out.println("prevTarget:" + prevTarget + ": v: " + v);
             fitnessSum += map[prevTarget][v];
             prevTarget = v;
         }
 
         fitnessSum += map[prevTarget][0];
 
-        return Math.round(fitnessSum*100.0)/100.0;
+        return Math.round(fitnessSum * 100.0) / 100.0;
     }
-    
+
     public void findGlobalBest() {
         for (Particle p : this.getParticles()) {
             double pBest = p.getFitnessValue();
@@ -103,7 +78,7 @@ public class Swarm {
         }
     }
 
-    public void printIterationResults(int t, Map<String, Map<Double, Double>> particleProgress) {
+    public void printIteration(int t, Map<String, Map<Double, Double>> particleProgress) {
         System.out.print("|  " + (t + 1) + " \t\t|\t");
         jtaOp.append("|  " + (t + 1) + " \t\t|\t");
         int pNo = 1;
@@ -117,14 +92,14 @@ public class Swarm {
 
             jtaOp.append(p.getFitnessValue() + "\t" + p.getpBestValue() + "\t\t|\t");
 
-            graphArray[pNo-1][t] = p.getpBestValue();
+            graphArray[pNo - 1][t] = p.getpBestValue();
             pNo++;
         }
         System.out.println(gValue + "\t\t|");
         jtaOp.append(gValue + "\t\t|\n");
     }
 
-    public void optimizeSolutions() {
+    public void updateParticleValue() {
 
         for (Particle p : swarm) {
 
@@ -134,12 +109,9 @@ public class Swarm {
             // Updating position according new velocity
             updatePosition(p);
 
-//            double fitnessValue = getFitnessValue(p.getPath());
-//            p.setFitnessValue(fitnessValue);
-
             double fitnessValue = getFitnessValue(p.getPath());
             p.setFitnessValue(fitnessValue);
-            
+
             double path[] = Helper.replicateArray(p.getPath());
             double velocity[] = Helper.replicateArray(p.getpBestVelocity());
 
@@ -165,8 +137,6 @@ public class Swarm {
 
         for (int i = 0; i < newVelocity.length; i++) {
             newVelocity[i] = INERTIA * p.getpVelocity()[i] + (CONGNITIVE * r1 * (p.getpBest()[i] - p.getPath()[i])) + (SOCIAL * r2 * (gBestPath[i] - p.getPath()[i]));
-//            if(newVelocity[i]<0)
-//                System.out.println("New velo < 0: "+ newVelocity[i]);
         }
 
         p.setpVelocity(newVelocity);
@@ -179,19 +149,16 @@ public class Swarm {
         for (int i = 0; i < p.getPath().length; i++) {
             double value = p.getPath()[i] + p.getpVelocity()[i];
             path[i] = value > p.getPath().length ? p.getPath().length : value;
-//            p.xSolution[i] = p.xSolution[i] + p.pVelocity[i] > p.xSolution.length ? p.xSolution.length : p.xSolution[i] + p.pVelocity[i];
         }
-
         p.setPath(path);
-
     }
 
     public int[] decodeStrikeRoute() {
 
-        System.out.println("gFitnessValue=" + gValue);
-        jtaOp.append("gFitnessValue=" + gValue + "\n");
-        System.out.println("gBest=" + Arrays.toString(gBestPath));
-        jtaOp.append("gBest=" + Arrays.toString(gBestPath)+"\n");
+        System.out.println("Global Fitness Value=" + gValue);
+        jtaOp.append("Global Fitness Value=" + gValue + "\n");
+        System.out.println("GBest=" + Arrays.toString(gBestPath));
+        jtaOp.append("gBest=" + Arrays.toString(gBestPath) + "\n");
 
         Map<Double, List<Integer>> routes = new HashMap<>();
 
@@ -208,7 +175,6 @@ public class Swarm {
 
         for (int i = 0; i < strikeRoute.length; i++) {
             if (routes.get(gBestPath[i]).size() > 1) {
-                // find the lowest velocity and add that first				
                 int j = i;
                 for (int k = 0; k < routes.get(gBestPath[j]).size(); k++) {
                     strikeRoute[i] = routes.get(gBestPath[j]).get(k) + 1;
@@ -219,12 +185,9 @@ public class Swarm {
                 strikeRoute[i] = routes.get(gBestPath[i]).get(0) + 1;
             }
         }
-
-//                double distance[] = Helper.intToDoubleArray(strikeRoute);
-//                System.out.println("Total Distance: "+getFitnessValue(distance) + " miles");
         return strikeRoute;
     }
-    
+
     public double[][] getMap() {
         return map;
     }
@@ -240,6 +203,5 @@ public class Swarm {
     public void setGraphArray(double[][] graphArray) {
         this.graphArray = graphArray;
     }
-    
-    
+
 }
