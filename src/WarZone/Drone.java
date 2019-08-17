@@ -20,7 +20,8 @@ public class Drone {
     public Drone(int capacity) {
         this.name = "Drone-" + (++no);
         this.payLoadCapacity = capacity;
-        this.fuel = 200;
+
+        this.fuel = 100;
         this.avg = 20;
     }
 
