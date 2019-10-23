@@ -222,10 +222,10 @@ public class WarZoneSimulatorDirectory {
         int minValue = (int) adjMatrix[index][0];
         int min = 0;
         for (int i = 0; i < 5; i++) {
-            if (minValue < (int) adjMatrix[index][i]) {
+            if (minValue >= (int) adjMatrix[index][i]) {
                 min = i;
-            }
-            minValue = (int) adjMatrix[index][i];
+                minValue = (int) adjMatrix[index][i];
+            }            
         }
         return min;
     }
